@@ -4,6 +4,4 @@
 
 ### Admin - Laravel 6
 
-### Client - NextJS
-
 ### DB - MySql

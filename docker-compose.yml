@@ -1,36 +1,52 @@
 version: '3.3'
 services:
     admin-nginx:
+        container_name: admin-nginx
         build:
-            context: ${PWD}/docker/development/admin-nginx
+            context: ${PWD}/admin/docker
+            dockerfile: development/nginx/Dockerfile
         ports:
             - "8888:80"
         volumes:
             - ./admin:/app/admin
         depends_on:
-            - php-fpm
-    api-nginx:
+            - admin-php
+    admin-php:
+        container_name: admin-php
         build:
-            context: ${PWD}/docker/development/api-nginx
+            context: ${PWD}/admin/docker
+            dockerfile: development/php-fpm/Dockerfile
+        volumes:
+            - ./admin:/app/admin
+        depends_on:
+            - mysql
+            - mysql-test
+    api-nginx:
+        container_name: api-nginx
+        build:
+            context: ${PWD}/api/docker
+            dockerfile: development/nginx/Dockerfile
         ports:
             - "9999:80"
         volumes:
             - ./api:/app/api
         depends_on:
-            - php-fpm
+            - api-php
         networks:
             default:
                 ipv4_address: 172.20.0.9
-    php-fpm:
+    api-php:
+        container_name: api-php
         build:
-            context: ${PWD}/docker/development/php-fpm
+            context: ${PWD}/api/docker
+            dockerfile: development/php-fpm/Dockerfile
         volumes:
-            - ./admin:/app/admin
             - ./api:/app/api
         depends_on:
             - mysql
             - mysql-test
     mysql:
+        container_name: mysql
         image: mysql:5.7
         volumes:
             - ${PWD}/storage/mysql:/var/lib/mysql
@@ -42,6 +58,7 @@ services:
         ports:
             - "33061:3306"
     mysql-test:
+        container_name: mysql-test
         image: mysql:5.7
         volumes:
             - ${PWD}/storage/mysql-test:/var/lib/mysql
