@@ -12,9 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use OpenApi\Annotations as OA;
 
 /**
  * @Route("/users")
+ * @OA\Tag(name="User")
  * @IsGranted("ROLE_ADMIN")
  */
 class UserController extends AbstractController

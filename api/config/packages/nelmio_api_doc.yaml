@@ -14,3 +14,8 @@ nelmio_api_doc:
           bearerFormat: JWT
     security:
       - Bearer: []
+    tags:
+      - name: "Auth"
+        description: "Authentication related endpoints"
+      - name: "User"
+        description: "User related endpoints"
