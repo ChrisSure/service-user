@@ -33,7 +33,7 @@ class DeleteUserControllerTest extends Base
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_OK);
-        $this->assertEquals($response->message, 'You successfull deleted user');
+        $this->assertEquals($response->message, 'User was deleted');
     }
 
     private function createUser(): int

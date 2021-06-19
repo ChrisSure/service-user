@@ -61,7 +61,7 @@ class UpdateUserControllerTest extends Base
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_OK);
-        $this->assertEquals($response->message, 'Updated successfull');
+        $this->assertEquals($response->message, 'Updated successful');
 
         $this->revertChanges();
     }
