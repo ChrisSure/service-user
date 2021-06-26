@@ -12,9 +12,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use OpenApi\Annotations as OA;
 
 /**
  * @Route("/users")
+ * @OA\Tag(name="User")
  * @IsGranted("ROLE_ADMIN")
  */
 class UserController extends AbstractController
@@ -54,7 +56,8 @@ class UserController extends AbstractController
                 [
                     'users' => $users,
                     'totalUsers' => $totalUsers
-                ],  JsonResponse::HTTP_OK);
+                ],  JsonResponse::HTTP_OK
+            );
         } catch (\Exception $e) {
             return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
@@ -93,8 +96,8 @@ class UserController extends AbstractController
         }
 
         try {
-            $user = $this->userService->create($data);
-            return new JsonResponse(['message' => "Created successfull"], JsonResponse::HTTP_CREATED);
+            $this->userService->create($data);
+            return new JsonResponse(['message' => "Created successful"], JsonResponse::HTTP_CREATED);
         } catch(\InvalidArgumentException $e) {
             return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
         }
@@ -116,8 +119,8 @@ class UserController extends AbstractController
         }
 
         try {
-            $user = $this->userService->update($data, $id);
-            return new JsonResponse(['message' => "Updated successfull"], JsonResponse::HTTP_OK);
+            $this->userService->update($data, $id);
+            return new JsonResponse(['message' => "Updated successful"], JsonResponse::HTTP_OK);
         } catch(NotFoundHttpException $e) {
                 return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_NOT_FOUND);
         } catch(\InvalidArgumentException $e) {
@@ -137,8 +140,8 @@ class UserController extends AbstractController
     public function delete($id): JsonResponse
     {
         try {
-            $user = $this->userService->delete($id);
-            return new JsonResponse(['message' => "You successfull deleted user"], JsonResponse::HTTP_OK);
+            $this->userService->delete($id);
+            return new JsonResponse(['message' => "User was deleted"], JsonResponse::HTTP_OK);
         } catch(NotFoundHttpException $e) {
             return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_NOT_FOUND);
         }
@@ -154,8 +157,8 @@ class UserController extends AbstractController
     public function activate($id): JsonResponse
     {
         try {
-            $user = $this->userService->activate($id);
-            return new JsonResponse(['message' => "You successfull activate user"], JsonResponse::HTTP_OK);
+            $this->userService->activate($id);
+            return new JsonResponse(['message' => "User was activated"], JsonResponse::HTTP_OK);
         } catch(NotFoundHttpException $e) {
             return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_NOT_FOUND);
         }
@@ -171,8 +174,8 @@ class UserController extends AbstractController
     public function block($id): JsonResponse
     {
         try {
-            $user = $this->userService->block($id);
-            return new JsonResponse(['message' => "You successfull block user"], JsonResponse::HTTP_OK);
+            $this->userService->block($id);
+            return new JsonResponse(['message' => "User was blocked"], JsonResponse::HTTP_OK);
         } catch(NotFoundHttpException $e) {
             return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_NOT_FOUND);
         }

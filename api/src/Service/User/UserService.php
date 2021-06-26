@@ -97,7 +97,6 @@ class UserService
         $user->setRoles($data['role']);
         $user->setStatus($data['status'])->onPrePersist()->onPreUpdate();
         $this->userRepository->save($user);
-
         return $user;
     }
 
@@ -118,7 +117,6 @@ class UserService
         $user->setRoles($data['role']);
         $user->setStatus($data['status'])->onPreUpdate();
         $this->userRepository->save($user);
-
         return $user;
     }
 
@@ -145,7 +143,6 @@ class UserService
         $user = $this->userRepository->get($id);
         $user->setStatus(User::$STATUS_ACTIVE);
         $this->userRepository->save($user);
-
         return $user;
     }
 
@@ -160,7 +157,6 @@ class UserService
         $user = $this->userRepository->get($id);
         $user->setStatus(User::$STATUS_BLOCKED);
         $this->userRepository->save($user);
-
         return $user;
     }
 }

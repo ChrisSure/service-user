@@ -1,7 +1,6 @@
 docker-compose run --rm php-fpm                     ---- run docker container
 
-docker-compose run --rm php-fpm sh                  ---- enter inside container php
-docker-compose run --rm client sh                   ---- enter inside container client
+docker-compose run --rm api-php sh                  ---- enter inside container php
 
 php bin/console make:migration                      ---- create migrations with entity shcema
 php bin/console doctrine:migrations:migrate         ---- import migrate to db
@@ -16,3 +15,20 @@ docker logs --details <container_id>                ---- Logs docker container
 docker ps -a                                        ---- list of containers docker
 sudo systemctl stop docker                               ---- Docker stop
 sudo systemctl start docker                              ---- Docker start
+
+
+
+
+Set up admin-part ->
+1. Create folders storage/framework/cache, storage/framework/sessions, storage/framework/views
+2. Make permission for these folder 777
+3. Run tests
+4. Go to admin-php container and run npm i, npm run watch
+
+Set up api-part ->
+1. Create folders var/cache, var/log
+2. Make permission for these folder 777
+3. Create DB -> 127.0.0.1|33061|tkuku:secret:nyfind
+4. Run migrations and fixtures
+5. Create test DB look usual db
+6. Run tests
