@@ -56,7 +56,8 @@ class UserController extends AbstractController
                 [
                     'users' => $users,
                     'totalUsers' => $totalUsers
-                ],  JsonResponse::HTTP_OK);
+                ],  JsonResponse::HTTP_OK
+            );
         } catch (\Exception $e) {
             return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_INTERNAL_SERVER_ERROR);
         }
