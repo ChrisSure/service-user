@@ -47,7 +47,7 @@ class CreateUserControllerTest extends Base
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_CREATED);
-        $this->assertEquals($response->message, 'Created successfull');
+        $this->assertEquals($response->message, 'Created successful');
 
         $this->revertChanges($email);
     }
