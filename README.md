@@ -1,7 +1,7 @@
-# NY Find
+# User Service
 
 ### Api - Symfony 5
 
-### Admin - Laravel 6
+### Admin - Angular 12
 
 ### DB - MySql
