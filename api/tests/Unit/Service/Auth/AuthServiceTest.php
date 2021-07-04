@@ -287,7 +287,7 @@ class AuthServiceTest extends Base
             $this->socialUserRepository
         );
 
-        $result = $authService->confirmRegisterUser(['id' => $this->faker->randomDigit, 'token' => $token]);
+        $result = $authService->confirmRegisterUser(['user_id' => $this->faker->randomDigit, 'token' => $token]);
 
         $this->assertEquals($result, $jwtToken);
     }
@@ -382,7 +382,7 @@ class AuthServiceTest extends Base
             $this->socialUserRepository
         );
 
-        $result = $authService->confirmNewPassword(['id' => $this->faker->randomDigit, 'token' => $token]);
+        $result = $authService->confirmNewPassword(['user_id' => $this->faker->randomDigit, 'token' => $token]);
 
         $this->assertTrue(is_object($result));
         $this->assertEquals($result->getToken(), $token);
@@ -494,7 +494,7 @@ class AuthServiceTest extends Base
             $this->socialUserRepository
         );
 
-        $result = $authService->confirmRegisterUser(['id' => $this->faker->randomDigit, 'token' => $this->faker->sentence]);
+        $result = $authService->confirmRegisterUser(['user_id' => $this->faker->randomDigit, 'token' => $this->faker->sentence]);
     }
 
     /**
@@ -521,7 +521,7 @@ class AuthServiceTest extends Base
             $this->socialUserRepository
         );
 
-        $result = $authService->confirmRegisterUser(['id' => $this->faker->randomDigit, 'token' => $this->faker->sentence]);
+        $result = $authService->confirmRegisterUser(['user_id' => $this->faker->randomDigit, 'token' => $this->faker->sentence]);
     }
 
     /**
@@ -548,7 +548,7 @@ class AuthServiceTest extends Base
             $this->socialUserRepository
         );
 
-        $result = $authService->confirmRegisterUser(['id' => $this->faker->randomDigit, 'token' => $token]);
+        $result = $authService->confirmRegisterUser(['user_id' => $this->faker->randomDigit, 'token' => $token]);
     }
     //Separate problems
 
