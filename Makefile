@@ -3,7 +3,11 @@ up: docker-up
 down: docker-down
 build: docker-build
 restart: down up
+lint: api-lint
 
+api-lint:
+	docker-compose run --rm api-php composer lint
+	docker-compose run --rm api-php composer cs-check
 
 docker-up:
 	docker-compose up -d
