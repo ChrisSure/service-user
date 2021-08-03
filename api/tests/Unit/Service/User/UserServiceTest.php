@@ -38,11 +38,11 @@ class UserServiceTest extends Base
     public function all()
     {
         $this->userRepositoryMock->shouldReceive('getAll')->andReturn([$this->userMock]);
-        $this->serializeServiceMock->shouldReceive('serialize')->andReturn(json_encode($this->userMock));
+        $this->serializeServiceMock->shouldReceive('normalize')->andReturn(array($this->userMock));
         $userService = new UserService($this->userRepositoryMock, $this->serializeServiceMock, $this->passwordServiceMock);
         $result = $userService->all($this->faker->email, $this->faker->name, $this->faker->name, $this->faker->numberBetween(0, 100));
 
-        $this->assertTrue(is_string($result));
+        $this->assertTrue(is_array($result));
     }
 
     /**
@@ -63,11 +63,11 @@ class UserServiceTest extends Base
     public function singleUser()
     {
         $this->userRepositoryMock->shouldReceive('get')->andReturn($this->userMock);
-        $this->serializeServiceMock->shouldReceive('serialize')->andReturn(json_encode($this->userMock));
+        $this->serializeServiceMock->shouldReceive('normalize')->andReturn(array($this->userMock));
         $userService = new UserService($this->userRepositoryMock, $this->serializeServiceMock, $this->passwordServiceMock);
         $result = $userService->single(1);
 
-        $this->assertTrue(is_string($result));
+        $this->assertTrue(is_array($result));
     }
 
     /**

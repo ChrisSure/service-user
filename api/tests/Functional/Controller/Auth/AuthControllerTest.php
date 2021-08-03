@@ -102,7 +102,7 @@ class AuthControllerTest extends Base
     public function confirmUser(): void
     {
         $user = $this->createUser();
-        $queryData = ['id' => $user->getId(), 'token' => $this->token];
+        $queryData = ['user_id' => $user->getId(), 'token' => $this->token];
         $this->client->request('GET', '/auth/confirm-register', $queryData);
 
         $response = json_decode($this->client->getResponse()->getContent());
@@ -155,7 +155,7 @@ class AuthControllerTest extends Base
     public function confirmNewPassword(): void
     {
         $user = $this->createUser();
-        $queryData = ['id' => $user->getId(), 'token' => $this->token];
+        $queryData = ['user_id' => $user->getId(), 'token' => $this->token];
         $this->client->request('GET', '/auth/confirm-new-password', $queryData);
 
         $response = json_decode($this->client->getResponse()->getContent());

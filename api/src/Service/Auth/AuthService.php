@@ -124,7 +124,7 @@ class AuthService
      */
     public function confirmRegisterUser(array $data): string
     {
-        $user = $this->userRepository->get($data['id']);
+        $user = $this->userRepository->get($data['user_id']);
         $this->hasToken($user);
         $this->checkToken($user, $data['token']);
 
@@ -171,7 +171,7 @@ class AuthService
      */
     public function confirmNewPassword(array $data): User
     {
-        $user = $this->userRepository->get($data['id']);
+        $user = $this->userRepository->get($data['user_id']);
         $this->hasToken($user);
         $this->checkToken($user, $data['token']);
         return $user;

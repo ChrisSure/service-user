@@ -17,7 +17,7 @@ class SingleUserControllerTest extends Base
         $this->client->request('GET', '/users/' . $id = 1);
 
         $response = json_decode($this->client->getResponse()->getContent());
-        $user = json_decode($response->user);
+        $user = $response->user;
 
         $this->assertTrue($this->client->getResponse()->isSuccessful());
         $this->assertEquals($user->id, $id);

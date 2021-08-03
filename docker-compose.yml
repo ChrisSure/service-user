@@ -1,26 +1,5 @@
 version: '3.3'
 services:
-    admin-nginx:
-        container_name: admin-nginx
-        build:
-            context: ${PWD}/admin/docker
-            dockerfile: development/nginx/Dockerfile
-        ports:
-            - "8888:80"
-        volumes:
-            - ./admin:/app/admin
-        depends_on:
-            - admin-php
-    admin-php:
-        container_name: admin-php
-        build:
-            context: ${PWD}/admin/docker
-            dockerfile: development/php-fpm/Dockerfile
-        volumes:
-            - ./admin:/app/admin
-        depends_on:
-            - mysql
-            - mysql-test
     api-nginx:
         container_name: api-nginx
         build:
@@ -32,9 +11,6 @@ services:
             - ./api:/app/api
         depends_on:
             - api-php
-        networks:
-            default:
-                ipv4_address: 172.20.0.9
     api-php:
         container_name: api-php
         build:
@@ -45,6 +21,15 @@ services:
         depends_on:
             - mysql
             - mysql-test
+    admin:
+        container_name: admin
+        build:
+            context: ./
+            dockerfile: ${PWD}/admin/docker/development/Dockerfile
+        volumes:
+            - ./admin:/app/admin
+        ports:
+            - '4200:4200'
     mysql:
         container_name: mysql
         image: mysql:5.7
@@ -69,8 +54,3 @@ services:
             - "MYSQL_DATABASE=nyfind-test"
         ports:
             - "33062:3306"
-networks:
-    default:
-        ipam:
-            config:
-                - subnet: 172.20.0.9/20
