@@ -6,7 +6,6 @@ php bin/console make:migration                      ---- create migrations with 
 php bin/console doctrine:migrations:migrate         ---- import migrate to db
 php bin/console doctrine:fixtures:load              ---- load fixture to db
 php bin/phpunit                                     ---- run php unit tests Symfony
-php artisan test                                    ---- run php unit tests Laravel
 
 php bin/console doctrine:fixtures:load --env=test   ---- test enviroment
 
@@ -17,13 +16,6 @@ sudo systemctl stop docker                               ---- Docker stop
 sudo systemctl start docker                              ---- Docker start
 
 
-
-
-Set up admin-part ->
-1. Create folders storage/framework/cache, storage/framework/sessions, storage/framework/views
-2. Make permission for these folder 777
-3. Run tests
-4. Go to admin-php container and run npm i, npm run watch
 
 Set up api-part ->
 1. Create folders var/cache, var/log

@@ -41,7 +41,21 @@ class SerializeService
                 return $object->getId();
             }
         ]);
-        //return $serializer->serialize($jsonObject, 'json');
+    }
+
+    /**
+     * Normalize object in order to send by api
+     *
+     * @param $entity
+     * @return array
+     */
+    public function normalize($entity): array
+    {
+        return $this->serializer->normalize($entity, 'json', [
+            'circular_reference_handler' => function ($object) {
+                return $object->getId();
+            }
+        ]);
     }
 
     /**

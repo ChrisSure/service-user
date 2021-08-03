@@ -47,11 +47,11 @@ class UserService
      * @param $status
      * @param $role
      * @param $page
-     * @return string
+     * @return array
      */
-    public function all($email, $status, $role, $page): string
+    public function all($email, $status, $role, $page): array
     {
-        return $this->serializeService->serialize($this->userRepository->getAll($email, $status, $role, $page));
+        return $this->serializeService->normalize($this->userRepository->getAll($email, $status, $role, $page));
     }
 
     /**
@@ -71,11 +71,11 @@ class UserService
      * Get single user
      *
      * @param $id
-     * @return string
+     * @return array
      */
-    public function single($id): string
+    public function single($id): array
     {
-        return $this->serializeService->serialize($this->userRepository->get($id));
+        return $this->serializeService->normalize($this->userRepository->get($id));
     }
 
     /**

@@ -18,7 +18,7 @@ class AllUserControllerTest extends Base
 
         $this->client->followRedirect();
         $response = json_decode($this->client->getResponse()->getContent());
-        $users = json_decode($response->users)[0];
+        $users = $response->users[0];
 
         $this->assertTrue($this->client->getResponse()->isSuccessful());
         $this->assertTrue(is_string($users->email));

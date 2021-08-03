@@ -22,6 +22,16 @@ class SerializeServiceTest extends Base
     /**
      * @test
      */
+    public function normalize(): void
+    {
+        $serializeService = new SerializeService();
+        $result = $serializeService->normalize(array(User::class));
+        $this->assertTrue(is_array($result));
+    }
+
+    /**
+     * @test
+     */
     public function deserialize(): void
     {
         $serializeService = new SerializeService();
