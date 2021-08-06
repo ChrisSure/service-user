@@ -1,0 +1,43 @@
+@import 'src/assets/scss/base';
+
+header {
+  height: 60px;
+  background: $base-color;
+  border-bottom: 1px solid $base-color;
+
+  .header-logo-block {
+    width: 13%;
+
+    .header-logo {
+      height: 30px;
+      padding: 10px;
+
+      a {
+        font-size: 22px;
+        font-weight: bold;
+        color: $white-color;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .header-main-block {
+      width: 87%;
+
+    .header-main {
+      height: 59px;
+      background: $white-color;
+
+      .log-out {
+        float: right;
+        margin-right: 30px;
+        margin-top: 15px;
+
+        a {
+          color: $base-grey;
+        }
+      }
+    }
+  }
+
+}
