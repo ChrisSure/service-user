@@ -5,36 +5,41 @@ aside {
   background: $base-color;
   border-radius: 0;
 
-  .list-group-item {
-    &:first-child {
-      border-top: 1px solid $base-light;
-    }
+  .list-group {
+    border-radius: none;
 
-    background-color: $base-color;
-    border-color: $white-color;
-    border-left: none;
-    border-right: none;
-    color: $white-color;
-    text-transform: uppercase;
-    padding: 12px 16px;
-    font-size: 12px;
-    font-weight: bold;
+    .list-group-item {
+      &:first-child {
+        border-top: 2px solid $base-light;
+      }
 
-    i {
-      margin-right: 3px;
-    }
+      background-color: $base-color;
+      border-color: $white-color;
+      border-left: none;
+      border-right: none;
+      color: $white-color;
+      text-transform: uppercase;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-weight: bold;
+      border-bottom: none;
+      padding-left: 20px;
 
-    &:hover {
-      color: $base-light;
-    }
+      i {
+        margin-right: 3px;
+      }
 
-    .list-group-body {
-      display: flex;
+      &:hover {
+        color: $base-light;
+      }
 
-      .list-group-body_icon {
-        margin-right: 5px;
+      .list-group-body {
+        display: flex;
+
+        .list-group-body_icon {
+          margin-right: 5px;
+        }
       }
     }
   }
-
 }

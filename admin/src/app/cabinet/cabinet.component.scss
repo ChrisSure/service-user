@@ -1,8 +1,16 @@
-.content {
-  padding: 30px;
-  height: 800px;
+@import 'src/assets/scss/base';
+
+.content-big {
+  background-color: $background-grey;
+
+  .content {
+    width: 87%;
+    padding: 30px;
+    height: 800px;
+  }
+
+  .sidebar {
+    width: 13%;
+  }
 }
 
-.sidebar {
-  width: 13%;
-}
