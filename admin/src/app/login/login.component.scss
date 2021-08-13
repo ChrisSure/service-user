@@ -1,0 +1,81 @@
+@import 'src/assets/scss/base';
+
+.login-main {
+  height: 100vh;
+  background: $background-purple-light;
+  padding-top: 100px;
+
+  .login-body {
+    display: flex;
+    margin-left: 550px;
+
+    .service-info {
+      height: 300px;
+      text-align: left;
+      width: 30%;
+      margin-right: 150px;
+
+      h1 {
+        color: $base-color;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .welcome {
+        color: $black-color;
+        font-weight: 900;
+        font-size: 26px;
+      }
+    }
+
+    .login-main {
+      height: 280px;
+      background: $white-color;
+      width: 35%;
+      padding: 30px;
+      text-align: left;
+
+      h2 {
+        color: $black-color;
+        font-weight: 900;
+        font-size: 26px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+
+        input {
+          height: 40px;
+          border: none;
+          background: $background-grey;
+          margin-bottom: 20px;
+          padding: 10px 20px;
+
+          &::placeholder {
+            color: #ccc;
+            font-size: 14px;
+          }
+
+          &:focus {
+            outline: none;
+          }
+        }
+
+        button {
+          border: none;
+          height: 40px;
+          background: $base-color;
+          color: $white-color;
+          font-weight: 900;
+
+          &:hover {
+            background: $base-light;
+          }
+        }
+      }
+    }
+  }
+}
