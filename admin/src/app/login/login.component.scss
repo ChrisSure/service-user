@@ -3,17 +3,19 @@
 .login-main {
   height: 100vh;
   background: $background-purple-light;
-  padding-top: 100px;
+  padding: 100px 0;
 
-  .login-body {
-    display: flex;
-    margin-left: 550px;
+  @include laptop {
+    padding: 100px;
+  }
 
-    .service-info {
+  @include mobile {
+    padding: 50px 30px;
+  }
+
+  .service-info {
       height: 300px;
       text-align: left;
-      width: 30%;
-      margin-right: 150px;
 
       h1 {
         color: $base-color;
@@ -28,10 +30,16 @@
       }
     }
 
-    .login-main {
+  .login-block {
+    margin-left: 5%;
+
+    @include laptop {
+      margin-left: 0;
+    }
+
+    .login {
       height: 280px;
       background: $white-color;
-      width: 35%;
       padding: 30px;
       text-align: left;
 
@@ -47,20 +55,31 @@
         display: flex;
         flex-direction: column;
 
-        input {
-          height: 40px;
-          border: none;
-          background: $background-grey;
+        .input-block {
           margin-bottom: 20px;
-          padding: 10px 20px;
+          position: relative;
 
-          &::placeholder {
-            color: #ccc;
-            font-size: 14px;
+          input {
+            height: 40px;
+            border: none;
+            background: $background-grey;
+            padding: 10px 20px;
+            width: 100%;
+
+            &::placeholder {
+              color: #ccc;
+              font-size: 14px;
+            }
+
+            &:focus {
+              outline: none;
+            }
           }
 
-          &:focus {
-            outline: none;
+          .error {
+            font-size: 10px;
+            color: $base-red;
+            position: absolute;
           }
         }
 
@@ -74,8 +93,12 @@
           &:hover {
             background: $base-light;
           }
+          &:disabled {
+            background: $background-purple-disabled;
+          }
         }
       }
     }
   }
+
 }
