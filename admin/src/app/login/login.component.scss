@@ -13,6 +13,14 @@
     padding: 50px 30px;
   }
 
+  .alert {
+    width: 94%;
+
+    @include laptop {
+      width: 100%;
+    }
+  }
+
   .service-info {
       height: 300px;
       text-align: left;

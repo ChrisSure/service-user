@@ -1,5 +1,12 @@
 <div class="container-fluid login-main">
   <div class="row">
+    <div class="col-xl-7 offset-xl-3">
+      <div class="alert alert-danger" role="alert" *ngIf="loginError">
+        {{loginApiMessage}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
     <div class="col-xl-3 col-lg-12 offset-xl-3">
       <div class="service-info">
         <h1>User Service</h1>

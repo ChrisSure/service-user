@@ -14,11 +14,11 @@ export class LoginService {
 
   constructor(private http: HttpClient) {
     this.baseUrl = 'http://localhost:9999/auth/';
-    this.headers = new HttpHeaders().set('Content-Type', 'application/json');
+    this.headers = new HttpHeaders({'Content-Type': 'application/json'});
   }
 
   public signIn(login: Login): Observable<any> {
-    return this.http.post(this.baseUrl + 'signin', {email: login.email, password: login.password})
+    return this.http.post(this.baseUrl + 'signin', {email: login.email, password: login.password, type: 'admin'}, { headers: this.headers })
       .pipe(catchError(this.error));
   }
 

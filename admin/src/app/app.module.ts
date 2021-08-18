@@ -9,6 +9,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './services/login/login.service';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TokenService } from './services/token/token.service';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppRoutingModule
   ],
   providers: [
-    LoginService
+    LoginService,
+    TokenService
   ],
   bootstrap: [AppComponent]
 })
