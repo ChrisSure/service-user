@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { LoginService } from './services/login/login.service';
 import { ReactiveFormsModule } from '@angular/forms';
 import { TokenService } from './services/token/token.service';
+import { UserService } from './services/cabinet/users/user.servise';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { TokenService } from './services/token/token.service';
   ],
   providers: [
     LoginService,
-    TokenService
+    TokenService,
+    UserService
   ],
   bootstrap: [AppComponent]
 })

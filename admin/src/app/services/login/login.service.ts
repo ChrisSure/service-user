@@ -22,7 +22,7 @@ export class LoginService {
       .pipe(catchError(this.error));
   }
 
-  error(error: HttpErrorResponse) {
+  error(error: HttpErrorResponse): Observable<any> {
     return new Observable<any>(observer => {
       observer.next(error.error);
     });

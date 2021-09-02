@@ -44,4 +44,8 @@ export class TokenService {
     localStorage.removeItem('roles');
   }
 
+  public getToken(): string|null {
+    return localStorage.getItem('token');
+  }
+
 }
