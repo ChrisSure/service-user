@@ -6,6 +6,7 @@ import { CabinetComponent } from './cabinet.component';
 import { CabinetRoutingModule } from './cabinet-routing.module';
 import { HeaderComponent } from './template/header/header.component';
 import { SidebarComponent } from './template/sidebar/sidebar.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { SidebarComponent } from './template/sidebar/sidebar.component';
   ],
   imports: [
     CommonModule,
-    CabinetRoutingModule
+    CabinetRoutingModule,
+    ReactiveFormsModule,
   ],
   exports: [CabinetComponent],
   providers: [],

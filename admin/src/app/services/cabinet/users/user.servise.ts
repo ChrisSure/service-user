@@ -17,8 +17,9 @@ export class UserService {
     this.headers = new HttpHeaders({'Content-Type': 'application/json', 'Authorization': `Bearer ${this.tokenService.getToken()}`});
   }
 
-  public getUsers(): Observable<any> {
-    return this.http.get(this.baseUrl, { headers: this.headers })
+  public getUsers(filterString?: string): Observable<any> {
+    const url = (filterString) ? (this.baseUrl + filterString) : this.baseUrl;
+    return this.http.get(url, { headers: this.headers })
       .pipe(catchError(this.error));
   }
 
