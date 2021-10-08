@@ -1,0 +1,12 @@
+<div class="pagination" *ngIf="model.length > 0">
+  <nav aria-label="Page navigation example">
+    <ul class="pagination">
+      <li class="page-item" [ngClass]="{'disabled' : this.paginationService.page === 1}">
+        <a class="page-link" (click)="onPreviousPage()">Previous</a>
+      </li>
+      <li class="page-item" [ngClass]="{'disabled' : this.paginationService.page === this.paginationService.maxPages}">
+        <a class="page-link" (click)="onNextPage()">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>
