@@ -26,7 +26,7 @@
     <hr>
   </div>
   <div class="users-table">
-    <table class="table">
+    <table class="table" *ngIf="users.length > 0;else no_users">
       <thead>
       <tr>
         <th scope="col">#</th>
@@ -52,12 +52,13 @@
       </tr>
       </tbody>
     </table>
+    <ng-template #no_users>There are not users ...</ng-template>
   </div>
-  <div class="users-pagination">
+  <div class="users-pagination" *ngIf="users.length > 0">
     <nav aria-label="Page navigation example">
       <ul class="pagination">
-        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        <li class="page-item" [ngClass]="{'disabled' : page === 1}"><a class="page-link" (click)="previousPage()">Previous</a></li>
+        <li class="page-item" [ngClass]="{'disabled' : page === maxPages}"><a class="page-link" (click)="nextPage()">Next</a></li>
       </ul>
     </nav>
   </div>
