@@ -24,12 +24,12 @@ class AuthControllerTest extends Base
      */
     public function signInUser(): void
     {
-        $postData = ['email' => 'user@gmail.com', 'password' => '123', 'type' => 'site'];
+        $postData = json_encode(['email' => 'user@gmail.com', 'password' => '123', 'type' => 'site']);
 
         $this->client->request(
             'POST',
             '/auth/signin',
-            $postData
+            [], [], [], $postData
         );
 
         $response = json_decode($this->client->getResponse()->getContent());
@@ -43,12 +43,12 @@ class AuthControllerTest extends Base
      */
     public function signInAdmin(): void
     {
-        $postData = ['email' => 'admin@gmail.com', 'password' => '123', 'type' => 'admin'];
+        $postData = json_encode(['email' => 'admin@gmail.com', 'password' => '123', 'type' => 'admin']);
 
         $this->client->request(
             'POST',
             '/auth/signin',
-            $postData
+            [], [], [], $postData
         );
 
         $response = json_decode($this->client->getResponse()->getContent());

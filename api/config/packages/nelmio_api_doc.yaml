@@ -1,6 +1,6 @@
 nelmio_api_doc:
   areas:
-    path_patterns: [ ^/user, ^/auth ]
+    path_patterns: [ ^/user, ^/auth, ^/permissions ]
   documentation:
     info:
       title: User Service
@@ -19,3 +19,5 @@ nelmio_api_doc:
         description: "Authentication related endpoints"
       - name: "User"
         description: "User related endpoints"
+      - name: "Permissions"
+        description: "Permissions related endpoints"

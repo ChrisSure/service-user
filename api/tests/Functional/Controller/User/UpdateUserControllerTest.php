@@ -15,7 +15,7 @@ class UpdateUserControllerTest extends Base
     {
         $this->signIn(User::$ROLE_ADMIN);
         $data = ['email' => ''];
-        $this->client->request('PUT', '/users/2', [], [], [], json_encode($data));
+        $this->client->request('PUT', '/users/3', [], [], [], json_encode($data));
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_BAD_REQUEST);
@@ -43,7 +43,7 @@ class UpdateUserControllerTest extends Base
     {
         $this->signIn(User::$ROLE_ADMIN);
         $data = ['email' => 'super_admin@gmail.com', 'password' => '123', 'role' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE];
-        $this->client->request('PUT', '/users/2', $data);
+        $this->client->request('PUT', '/users/3', $data);
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_BAD_REQUEST);
@@ -57,7 +57,7 @@ class UpdateUserControllerTest extends Base
     {
         $this->signIn(User::$ROLE_ADMIN);
         $data = ['email' => 'admin_test@gmail.com', 'password' => '123', 'role' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE];
-        $this->client->request('PUT', '/users/2', $data);
+        $this->client->request('PUT', '/users/3', $data);
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_OK);

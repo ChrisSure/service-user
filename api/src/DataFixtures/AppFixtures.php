@@ -2,6 +2,7 @@
 
 namespace App\DataFixtures;
 
+use App\Entity\User\Permission;
 use App\Entity\User\SocialUser;
 use App\Entity\User\User;
 use App\Service\Auth\PasswordHashService;
@@ -40,6 +41,19 @@ class AppFixtures extends Fixture
      */
     public function load(ObjectManager $manager)
     {
+        // Create Permissions
+        $permission1 = new Permission();
+        $permission1->setName('Permission 1');
+        $permission1->setStatus(Permission::$STATUS_ACTIVE);
+        $permission1->onPrePersist();
+        $permission1->onPreUpdate();
+
+        $permission2 = new Permission();
+        $permission2->setName('Permission 2');
+        $permission2->setStatus(Permission::$STATUS_NEW);
+        $permission2->onPrePersist();
+        $permission2->onPreUpdate();
+
         // Set User
         $user = new User();
         $user->setEmail("user@gmail.com");
@@ -59,6 +73,18 @@ class AppFixtures extends Fixture
         $manager->persist($user);
         $manager->persist($socialUser);
 
+        // Set Moderator
+        $moderator = new User();
+        $moderator->setEmail("moderator@gmail.com");
+        $moderator->setRoles($user::$ROLE_BLOG_MODERATOR);
+        $moderator->setPasswordHash($this->passwordHashService->hashPassword($user, '123'));
+        $moderator->setStatus($user::$STATUS_ACTIVE);
+        $moderator->setPermission($permission1);
+        $moderator->onPrePersist();
+        $moderator->onPreUpdate();
+
+        $manager->persist($moderator);
+
 
         // Set Admin
         $admin = new User();
@@ -66,6 +92,7 @@ class AppFixtures extends Fixture
         $admin->setRoles($user::$ROLE_ADMIN);
         $admin->setPasswordHash($this->passwordHashService->hashPassword($user, '123'));
         $admin->setStatus($user::$STATUS_ACTIVE);
+        $admin->setPermission($permission2);
         $admin->onPrePersist();
         $admin->onPreUpdate();
 

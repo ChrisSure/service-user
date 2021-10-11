@@ -17,6 +17,7 @@ class User implements UserInterface
     public function __construct()
     {
         $this->social = new ArrayCollection();
+        $this->permission = new ArrayCollection();
     }
 
     /**
@@ -30,6 +31,11 @@ class User implements UserInterface
      * @ORM\OneToMany(targetEntity="SocialUser", mappedBy="user", cascade={"persist", "remove"})
      */
     private $social;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\User\Permission", inversedBy="users",cascade={"persist"})
+     */
+    private $permission;
 
     /**
      * @ORM\Column(type="string", length=180, unique=true)
@@ -78,6 +84,8 @@ class User implements UserInterface
     public static $ROLE_USER = "ROLE_USER";
     public static $ROLE_ADMIN = "ROLE_ADMIN";
     public static $ROLE_SUPER_ADMIN = "ROLE_SUPER_ADMIN";
+    public static $ROLE_SUPER_BLOG_MODERATOR = "ROLE_SUPER_BLOG_MODERATOR";
+    public static $ROLE_BLOG_MODERATOR = "ROLE_BLOG_MODERATOR";
 
     public static $STATUS_NEW = "new";
     public static $STATUS_ACTIVE = "active";
@@ -98,6 +106,8 @@ class User implements UserInterface
             self::$ROLE_USER => 'ROLE_USER',
             self::$ROLE_ADMIN => 'ROLE_ADMIN',
             self::$ROLE_SUPER_ADMIN => 'ROLE_SUPER_ADMIN',
+            self::$ROLE_SUPER_BLOG_MODERATOR => 'ROLE_SUPER_BLOG_MODERATOR',
+            self::$ROLE_BLOG_MODERATOR => 'ROLE_BLOG_MODERATOR',
         ];
     }
 
@@ -113,6 +123,24 @@ class User implements UserInterface
     public function getSocial(): Collection
     {
         return $this->social;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getPermission(): Collection
+    {
+        return $this->permission;
+    }
+
+    /**
+     * @param Permission $permission
+     * @return self
+     */
+    public function setPermission(Permission $permission): self
+    {
+        $this->permission[] = $permission;
+        return $this;
     }
 
     public function getEmail(): ?string
