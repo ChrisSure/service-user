@@ -33,7 +33,7 @@ class User implements UserInterface
     private $social;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User\Permission", inversedBy="users",cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\User\Permission", inversedBy="user", cascade={"persist"})
      */
     private $permission;
 

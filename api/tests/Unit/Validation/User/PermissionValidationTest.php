@@ -4,17 +4,17 @@ namespace App\Tests\Unit\Validation\User;
 
 use App\Entity\User\User;
 use App\Tests\Unit\Base;
-use App\Validation\User\UpdateUserValidation;
+use App\Validation\User\PermissionValidation;
 
-class UpdateUserValidationTest extends Base
+class PermissionValidationTest extends Base
 {
     /**
      * @test
      */
     public function successValidate(): void
     {
-        $validate = new UpdateUserValidation();
-        $data = ['email' => $this->faker->email, 'password' => $this->faker->password, 'role' => User::$ROLE_USER, 'status' => User::$STATUS_NEW];
+        $validate = new PermissionValidation();
+        $data = ['name' => $this->faker->title, 'status' => User::$STATUS_NEW];
         $result = $validate->validate($data);
 
         $this->assertEquals(0, $result->count());
@@ -25,8 +25,8 @@ class UpdateUserValidationTest extends Base
      */
     public function failureValidate(): void
     {
-        $validate = new UpdateUserValidation();
-        $data = ['email' => $this->faker->title, 'password' => $this->faker->password];
+        $validate = new PermissionValidation();
+        $data = ['name' => ''];
         $result = $validate->validate($data);
 
         $this->assertEquals(3, $result->count());

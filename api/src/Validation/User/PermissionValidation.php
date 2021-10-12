@@ -7,10 +7,10 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
 
 /**
- * Class UserAuthValidation
+ * Class PermissionValidation
  * @package App\Validation\User
  */
-class UpdateUserValidation
+class PermissionValidation
 {
     /**
      * Validor for login
@@ -22,18 +22,10 @@ class UpdateUserValidation
         $validator = Validation::createValidator();
         $constraint = new Assert\Collection(
             [
-                'email' =>
+                'name' =>
                     [
                         new Assert\NotBlank(),
-                        new Assert\Email()
-                    ],
-                'password' =>
-                    [
-
-                    ],
-                'role' =>
-                    [
-                        new Assert\NotBlank()
+                        new Assert\Length(['min' => 2])
                     ],
                 'status' =>
                     [

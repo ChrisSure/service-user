@@ -47,14 +47,28 @@ class PermissionRepository extends ServiceEntityRepository
     /**
      * Save permission
      *
-     * @param Permission $socialUser
+     * @param Permission $permission
      * @throws \Doctrine\ORM\ORMException
      * @throws \Doctrine\ORM\OptimisticLockException
      */
-    public function save(Permission $socialUser): void
+    public function save(Permission $permission): void
     {
         $entityManager = $this->getEntityManager();
-        $entityManager->persist($socialUser);
+        $entityManager->persist($permission);
+        $entityManager->flush();
+    }
+
+    /**
+     * Delete permission
+     *
+     * @param Permission $permission
+     * @throws \Doctrine\ORM\ORMException
+     * @throws \Doctrine\ORM\OptimisticLockException
+     */
+    public function delete(Permission $permission): void
+    {
+        $entityManager = $this->getEntityManager();
+        $entityManager->remove($permission);
         $entityManager->flush();
     }
 

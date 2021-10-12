@@ -2,6 +2,7 @@
 
 namespace App\Entity\User;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -19,7 +20,7 @@ class Permission
     private $id;
 
     /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User\User", mappedBy="user",cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="App\Entity\User\User", mappedBy="permission", cascade={"persist"})
      */
     private $user;
 

@@ -3,8 +3,8 @@
 namespace App\Controller\User;
 
 use App\Service\User\UserService;
-use App\Validation\Auth\CreateUserValidation;
-use App\Validation\Auth\UpdateUserValidation;
+use App\Validation\User\CreateUserValidation;
+use App\Validation\User\UpdateUserValidation;
 use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
