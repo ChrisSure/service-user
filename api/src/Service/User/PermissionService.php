@@ -3,11 +3,13 @@
 namespace App\Service\User;
 
 use App\Entity\User\Permission;
+use App\Exception\DbException;
 use App\Repository\User\PermissionRepository;
 use App\Service\Helper\SerializeService;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\OptimisticLockException;
 use Doctrine\ORM\ORMException;
-use http\Exception\RuntimeException;
 
 /**
  * Class PermissionService
@@ -55,8 +57,8 @@ class PermissionService
      * @param string $name
      * @param string $status
      * @return int
-     * @throws \Doctrine\ORM\NoResultException
-     * @throws \Doctrine\ORM\NonUniqueResultException
+     * @throws NoResultException
+     * @throws NonUniqueResultException
      */
     public function totalPermissions(string $name, string $status): int
     {
@@ -79,6 +81,7 @@ class PermissionService
      *
      * @param array $data
      * @return Permission $permission
+     * @throws DbException
      */
     public function create(array $data): Permission
     {
@@ -93,7 +96,7 @@ class PermissionService
         try {
             $this->permissionRepository->save($permission);
         } catch (OptimisticLockException | ORMException $e) {
-            throw new RuntimeException($e);
+            throw new DbException($e);
         }
         return $permission;
     }
@@ -104,6 +107,7 @@ class PermissionService
      * @param array $data
      * @param int $id
      * @return Permission $permission
+     * @throws DbException
      */
     public function update(array $data, int $id): Permission
     {
@@ -113,7 +117,7 @@ class PermissionService
         try {
             $this->permissionRepository->save($permission);
         } catch (OptimisticLockException | ORMException $e) {
-            throw new RuntimeException($e);
+            throw new DbException($e);
         }
         return $permission;
     }
@@ -123,6 +127,7 @@ class PermissionService
      *
      * @param int $id
      * @return void
+     * @throws DbException
      */
     public function delete(int $id): void
     {
@@ -130,7 +135,7 @@ class PermissionService
         try {
             $this->permissionRepository->delete($permission);
         } catch (OptimisticLockException | ORMException $e) {
-            throw new RuntimeException($e);
+            throw new DbException($e);
         }
     }
 }

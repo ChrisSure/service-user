@@ -2,11 +2,9 @@
 
 namespace App\Controller\User;
 
+use App\Exception\DbException;
 use App\Service\User\PermissionService;
-use App\Service\User\UserService;
 use App\Validation\User\PermissionValidation;
-use Doctrine\DBAL\DBALException;
-use http\Exception\RuntimeException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -99,7 +97,7 @@ class PermissionController extends AbstractController
         try {
             $this->permissionService->create($data);
             return new JsonResponse(['message' => "Created successful"], Response::HTTP_CREATED);
-        } catch(\InvalidArgumentException $e) {
+        } catch(\InvalidArgumentException | DbException $e) {
             return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }
@@ -124,7 +122,7 @@ class PermissionController extends AbstractController
             return new JsonResponse(['message' => "Updated successful"], Response::HTTP_OK);
         } catch(NotFoundHttpException $e) {
             return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
-        } catch(RuntimeException $e) {
+        } catch(DbException $e) {
             return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }
@@ -143,7 +141,7 @@ class PermissionController extends AbstractController
             return new JsonResponse(['message' => "Permission was deleted"], Response::HTTP_OK);
         } catch(NotFoundHttpException $e) {
             return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
-        } catch(RuntimeException $e) {
+        } catch(DbException $e) {
             return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }

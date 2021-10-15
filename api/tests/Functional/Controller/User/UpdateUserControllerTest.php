@@ -5,6 +5,7 @@ namespace App\Tests\Functional\Controller\User;
 use App\Entity\User\User;
 use App\Tests\Functional\Base;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
 
 class UpdateUserControllerTest extends Base
 {
@@ -18,7 +19,7 @@ class UpdateUserControllerTest extends Base
         $this->client->request('PUT', '/users/3', [], [], [], json_encode($data));
         $response = json_decode($this->client->getResponse()->getContent());
 
-        $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_BAD_REQUEST);
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
         $this->assertTrue(is_string($response->error));
     }
 
@@ -32,8 +33,8 @@ class UpdateUserControllerTest extends Base
         $this->client->request('PUT', '/users/235', $data);
         $response = json_decode($this->client->getResponse()->getContent());
 
-        $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_NOT_FOUND);
-        $this->assertEquals($response->error, 'User doesn\'t exist.');
+        $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals('User doesn\'t exist.', $response->error);
     }
 
     /**
@@ -46,8 +47,8 @@ class UpdateUserControllerTest extends Base
         $this->client->request('PUT', '/users/3', $data);
         $response = json_decode($this->client->getResponse()->getContent());
 
-        $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_BAD_REQUEST);
-        $this->assertEquals($response->error, 'User who has this email already exists.');
+        $this->assertEquals(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals('User who has this email already exists.', $response->error);
     }
 
     /**
@@ -60,8 +61,8 @@ class UpdateUserControllerTest extends Base
         $this->client->request('PUT', '/users/3', $data);
         $response = json_decode($this->client->getResponse()->getContent());
 
-        $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_OK);
-        $this->assertEquals($response->message, 'Updated successful');
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals('Updated successful', $response->message);
 
         $this->revertChanges();
     }

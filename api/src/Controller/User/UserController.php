@@ -2,6 +2,7 @@
 
 namespace App\Controller\User;
 
+use App\Exception\DbException;
 use App\Service\User\UserService;
 use App\Validation\User\CreateUserValidation;
 use App\Validation\User\UpdateUserValidation;
@@ -59,8 +60,8 @@ class UserController extends AbstractController
                     'totalUsers' => $totalUsers
                 ],  Response::HTTP_OK
             );
-        } catch (\Exception $e) {
-            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_INTERNAL_SERVER_ERROR);
+        } catch (DbException $e) {
+            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }
 
@@ -75,9 +76,9 @@ class UserController extends AbstractController
     {
         try {
             $user = $this->userService->single($id);
-            return new JsonResponse(['user' => $user], JsonResponse::HTTP_OK);
+            return new JsonResponse(['user' => $user], Response::HTTP_OK);
         } catch(NotFoundHttpException $e) {
-            return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_NOT_FOUND);
+            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -85,6 +86,7 @@ class UserController extends AbstractController
      * @Route("",  methods={"POST"})
      * Create users
      *
+     * @param Request $request
      * @return JsonResponse
      */
     public function create(Request $request): JsonResponse
@@ -93,14 +95,14 @@ class UserController extends AbstractController
 
         $violations = (new CreateUserValidation())->validate($data);
         if ($violations->count() > 0) {
-            return new JsonResponse(["error" => (string)$violations], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(["error" => (string)$violations], Response::HTTP_BAD_REQUEST);
         }
 
         try {
             $this->userService->create($data);
-            return new JsonResponse(['message' => "Created successful"], JsonResponse::HTTP_CREATED);
+            return new JsonResponse(['message' => "Created successful"], Response::HTTP_CREATED);
         } catch(\InvalidArgumentException $e) {
-            return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }
 
@@ -116,18 +118,18 @@ class UserController extends AbstractController
 
         $violations = (new UpdateUserValidation())->validate($data);
         if ($violations->count() > 0) {
-            return new JsonResponse(["error" => (string)$violations], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(["error" => (string)$violations], Response::HTTP_BAD_REQUEST);
         }
 
         try {
             $this->userService->update($data, $id);
-            return new JsonResponse(['message' => "Updated successful"], JsonResponse::HTTP_OK);
+            return new JsonResponse(['message' => "Updated successful"], Response::HTTP_OK);
         } catch(NotFoundHttpException $e) {
-                return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_NOT_FOUND);
+                return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
         } catch(\InvalidArgumentException $e) {
-            return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         } catch (DBALException $e) {
-            return new JsonResponse(["error" => "User who has this email already exists."], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(["error" => "User who has this email already exists."], Response::HTTP_BAD_REQUEST);
         }
     }
 
@@ -138,13 +140,13 @@ class UserController extends AbstractController
      * @param int $id
      * @return JsonResponse
      */
-    public function delete($id): JsonResponse
+    public function delete(int $id): JsonResponse
     {
         try {
             $this->userService->delete($id);
-            return new JsonResponse(['message' => "User was deleted"], JsonResponse::HTTP_OK);
+            return new JsonResponse(['message' => "User was deleted"], Response::HTTP_OK);
         } catch(NotFoundHttpException $e) {
-            return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_NOT_FOUND);
+            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -155,13 +157,13 @@ class UserController extends AbstractController
      * @param int $id
      * @return JsonResponse
      */
-    public function activate($id): JsonResponse
+    public function activate(int $id): JsonResponse
     {
         try {
             $this->userService->activate($id);
-            return new JsonResponse(['message' => "User was activated"], JsonResponse::HTTP_OK);
+            return new JsonResponse(['message' => "User was activated"], Response::HTTP_OK);
         } catch(NotFoundHttpException $e) {
-            return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_NOT_FOUND);
+            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
         }
     }
 
@@ -172,13 +174,13 @@ class UserController extends AbstractController
      * @param int $id
      * @return JsonResponse
      */
-    public function block($id): JsonResponse
+    public function block(int $id): JsonResponse
     {
         try {
             $this->userService->block($id);
-            return new JsonResponse(['message' => "User was blocked"], JsonResponse::HTTP_OK);
+            return new JsonResponse(['message' => "User was blocked"], Response::HTTP_OK);
         } catch(NotFoundHttpException $e) {
-            return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_NOT_FOUND);
+            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
         }
     }
 }
