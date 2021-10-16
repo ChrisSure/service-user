@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Tests\Functional\Controller\User;
+namespace App\Tests\Functional\Controller\Permission;
 
 use App\Entity\User\User;
 use App\Tests\Functional\Base;

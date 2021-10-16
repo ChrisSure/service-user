@@ -5,6 +5,7 @@ namespace App\Controller\User;
 use App\Exception\DbException;
 use App\Service\User\PermissionService;
 use App\Validation\User\PermissionValidation;
+use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -124,6 +125,8 @@ class PermissionController extends AbstractController
             return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
         } catch(DbException $e) {
             return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+        } catch (DBALException $e) {
+            return new JsonResponse(["error" => "Permission who has this name already exists."], Response::HTTP_BAD_REQUEST);
         }
     }
 
