@@ -4,7 +4,7 @@ namespace App\Tests\Unit\Validation\User;
 
 use App\Entity\User\User;
 use App\Tests\Unit\Base;
-use App\Validation\Auth\UpdateUserValidation;
+use App\Validation\User\UpdateUserValidation;
 
 class UpdateUserValidationTest extends Base
 {

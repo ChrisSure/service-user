@@ -3,10 +3,11 @@ import { RouterModule, Routes } from '@angular/router';
 import { CabinetComponent } from './cabinet.component';
 import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
+import { CabinetGuard } from './cabinet.guard';
 
 const routes: Routes = [
   {
-    path: 'cabinet', component: CabinetComponent,
+    path: 'cabinet', component: CabinetComponent, canActivate: [CabinetGuard],
     children: [
       {
         path: '',

@@ -102,7 +102,7 @@ class UserServiceTest extends Base
         $this->expectException(\InvalidArgumentException::class);
 
         $userService = new UserService($this->userRepositoryMock, $this->serializeServiceMock, $this->passwordServiceMock);
-        $result = $userService->create($this->arrayData);
+        $userService->create($this->arrayData);
     }
 
     /**

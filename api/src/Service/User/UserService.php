@@ -3,9 +3,12 @@
 namespace App\Service\User;
 
 use App\Entity\User\User;
+use App\Exception\DbException;
 use App\Repository\User\UserRepository;
 use App\Service\Auth\PasswordHashService;
 use App\Service\Helper\SerializeService;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 
 /**
  * Class UserService
@@ -61,10 +64,15 @@ class UserService
      * @param $status
      * @param $role
      * @return int
+     * @throws DbException
      */
     public function totalUsers($email, $status, $role): int
     {
-        return $this->userRepository->getCountUsers($email, $status, $role);
+        try {
+            return $this->userRepository->getCountUsers($email, $status, $role);
+        } catch (NoResultException | NonUniqueResultException $e) {
+            throw new DbException($e);
+        }
     }
 
     /**
@@ -107,7 +115,7 @@ class UserService
      * @param int $id
      * @return User $user
      */
-    public function update(array $data, $id): User
+    public function update(array $data, int $id): User
     {
         $user = $this->userRepository->get($id);
         $user->setEmail($data['email']);

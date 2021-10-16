@@ -6,6 +6,9 @@ import { CabinetComponent } from './cabinet.component';
 import { CabinetRoutingModule } from './cabinet-routing.module';
 import { HeaderComponent } from './template/header/header.component';
 import { SidebarComponent } from './template/sidebar/sidebar.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { PaginationService } from '../services/cabinet/shared/pagination/pagination.service';
+import { PaginationComponent } from './shared/pagination/pagination.component';
 
 @NgModule({
   declarations: [
@@ -14,13 +17,17 @@ import { SidebarComponent } from './template/sidebar/sidebar.component';
     HomeComponent,
     CabinetComponent,
     UsersComponent,
+    PaginationComponent
   ],
   imports: [
     CommonModule,
-    CabinetRoutingModule
+    CabinetRoutingModule,
+    ReactiveFormsModule,
   ],
   exports: [CabinetComponent],
-  providers: [],
+  providers: [
+    PaginationService
+  ],
   bootstrap: []
 })
 export class CabinetModule { }

@@ -1,7 +1,11 @@
 <app-header></app-header>
-<app-sidebar></app-sidebar>
-<h1 class="display-1 text-center">Cabinet</h1>
-<h3 class="display-7 text-center"><a routerLink="/">Home</a></h3>
-<h3 class="display-7 text-center"><a routerLink="/cabinet">Cabinet</a></h3>
-<h3 class="display-7 text-center"><a routerLink="/cabinet/users">Users</a></h3>
-<router-outlet></router-outlet>
+<div class="container-fluid content-big">
+  <div class="row">
+    <div class="col-2 p-0 sidebar">
+      <app-sidebar></app-sidebar>
+    </div>
+    <div class="col-10 content">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

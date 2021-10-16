@@ -7,6 +7,7 @@ php bin/console doctrine:migrations:migrate         ---- import migrate to db
 php bin/console doctrine:fixtures:load              ---- load fixture to db
 php bin/phpunit                                     ---- run php unit tests Symfony
 
+php bin/console doctrine:migrations:migrate --env=test
 php bin/console doctrine:fixtures:load --env=test   ---- test enviroment
 
 docker inspect <container_id>                       ---- detail information about container

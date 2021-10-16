@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { CabinetModule } from './cabinet/cabinet.module';
 import { LoginComponent } from './login/login.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
+import { HttpClientModule } from '@angular/common/http';
+import { LoginService } from './services/login/login.service';
+import { ReactiveFormsModule } from '@angular/forms';
+import { TokenService } from './services/token/token.service';
+import { UserService } from './services/cabinet/users/user.servise';
 
 @NgModule({
   declarations: [
@@ -15,10 +20,16 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     CabinetModule,
-    AppRoutingModule,
+    AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    LoginService,
+    TokenService,
+    UserService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
