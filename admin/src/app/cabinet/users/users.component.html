@@ -1,1 +1,58 @@
-<p>users works!</p>
+<div class="users-block">
+  <div class="users-filter">
+    <form [formGroup]="usersFilterForm" (ngSubmit)="onSubmit()">
+      <div class="input-block">
+        <input class="form-control" type="text" formControlName="email" placeholder="Email" />
+      </div>
+      <div class="input-block">
+        <select class="form-select" aria-label="Default select example" formControlName="role">
+          <option value="0">Role</option>
+          <option value="ROLE_USER">User</option>
+          <option value="ROLE_ADMIN">Admin</option>
+          <option value="ROLE_SUPER_ADMIN">Super_Admin</option>
+        </select>
+      </div>
+      <div class="input-block">
+        <select class="form-select" aria-label="Default select example" formControlName="status">
+          <option value="0">Status</option>
+          <option value="new">New</option>
+          <option value="active">Active</option>
+          <option value="blocked">Blocked</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-success">Filter</button>
+      <button type="submit" class="btn btn-danger" (click)="clearFilters()">Clear</button>
+    </form>
+    <hr>
+  </div>
+  <div class="users-table">
+    <table class="table" *ngIf="users.length > 0;else no_users">
+      <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">Email</th>
+        <th scope="col">Roles</th>
+        <th scope="col">Status</th>
+        <th scope="col">Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let user of users; let i = index;">
+        <th scope="row">{{i + 1}}</th>
+        <td>{{user.email}}</td>
+        <td>
+      <span *ngFor="let role of user.roles">
+        <span class="badge bg-secondary">{{role}}</span>
+      </span>
+        </td>
+        <td>
+          <span class="badge bg-secondary" [className]="'badge bg-secondary badge-' + user.status">{{user.status}}</span>
+        </td>
+        <td><button type="button" class="btn btn-primary">Open</button></td>
+      </tr>
+      </tbody>
+    </table>
+    <ng-template #no_users>There are not users ...</ng-template>
+  </div>
+  <app-pagination [model]="users" (previousPage)="onPreviousPage()" (nextPage)="onNextPage()"></app-pagination>
+</div>

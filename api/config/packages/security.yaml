@@ -9,6 +9,7 @@ security:
                 property: email
     role_hierarchy:
         ROLE_SUPER_ADMIN: [ROLE_ADMIN]
+        ROLE_SUPER_BLOG_MODERATOR: [ROLE_BLOG_MODERATOR]
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/

@@ -1,0 +1,112 @@
+@import 'src/assets/scss/base';
+
+.login-main {
+  height: 100vh;
+  background: $background-purple-light;
+  padding: 100px 0;
+
+  @include laptop {
+    padding: 100px;
+  }
+
+  @include mobile {
+    padding: 50px 30px;
+  }
+
+  .alert {
+    width: 94%;
+
+    @include laptop {
+      width: 100%;
+    }
+  }
+
+  .service-info {
+      height: 300px;
+      text-align: left;
+
+      h1 {
+        color: $base-color;
+        font-weight: 900;
+        text-transform: uppercase;
+      }
+
+      .welcome {
+        color: $black-color;
+        font-weight: 900;
+        font-size: 26px;
+      }
+    }
+
+  .login-block {
+    margin-left: 5%;
+
+    @include laptop {
+      margin-left: 0;
+    }
+
+    .login {
+      height: 280px;
+      background: $white-color;
+      padding: 30px;
+      text-align: left;
+
+      h2 {
+        color: $black-color;
+        font-weight: 900;
+        font-size: 26px;
+        text-transform: uppercase;
+        margin-bottom: 20px;
+      }
+
+      form {
+        display: flex;
+        flex-direction: column;
+
+        .input-block {
+          margin-bottom: 20px;
+          position: relative;
+
+          input {
+            height: 40px;
+            border: none;
+            background: $background-grey;
+            padding: 10px 20px;
+            width: 100%;
+
+            &::placeholder {
+              color: #ccc;
+              font-size: 14px;
+            }
+
+            &:focus {
+              outline: none;
+            }
+          }
+
+          .error {
+            font-size: 10px;
+            color: $base-red;
+            position: absolute;
+          }
+        }
+
+        button {
+          border: none;
+          height: 40px;
+          background: $base-color;
+          color: $white-color;
+          font-weight: 900;
+
+          &:hover {
+            background: $base-light;
+          }
+          &:disabled {
+            background: $background-purple-disabled;
+          }
+        }
+      }
+    }
+  }
+
+}

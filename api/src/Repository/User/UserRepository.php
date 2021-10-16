@@ -82,10 +82,9 @@ class UserRepository extends ServiceEntityRepository
             $qb->andwhere('u.roles = :role')->setParameter('role', $role);
         }
 
-        if ($page) {
-            $offset = ($page - 1)  * $this->pageCount;
-            $qb->setMaxResults($this->pageCount)->setFirstResult($offset);
-        }
+        $page = $page ?: 1;
+        $offset = ($page - 1)  * $this->pageCount;
+        $qb->setMaxResults($this->pageCount)->setFirstResult($offset);
 
         return $qb->getQuery()->getResult();
     }

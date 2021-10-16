@@ -1,0 +1,64 @@
+@import 'src/assets/scss/base';
+
+header {
+  height: 61px;
+  background: $base-color;
+
+  .header-logo-block {
+    width: 13%;
+
+    .header-logo {
+      height: 30px;
+      padding: 10px;
+
+      a {
+        font-size: 22px;
+        font-weight: bold;
+        color: $white-color;
+        text-transform: uppercase;
+      }
+    }
+  }
+
+  .header-main-block {
+    width: 87%;
+    height: 63px;
+    background: $white-color;
+    border-bottom: 2px solid $base-color;
+
+      .breadcrumb {
+        padding: 15px 0 0 20px;
+
+        .active {
+          color: $base-grey;
+        }
+
+        a {
+          color: $base-color;
+        }
+      }
+
+      .notify-block {
+        display: flex;
+        flex-direction: row-reverse;
+
+        i {
+          color: $base-grey;
+          font-size: 20px;
+          padding-top: 18px;
+          margin-right: 15px;
+        }
+      }
+
+      .log-out {
+        float: right;
+        margin-right: 30px;
+        margin-top: 15px;
+
+        a {
+          color: $base-grey;
+        }
+      }
+  }
+
+}

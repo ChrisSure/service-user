@@ -1,2 +1,51 @@
-<h1 class="display-1 text-center">Login</h1>
-<h3 class="display-7 text-center"><a routerLink="/cabinet">Cabinet</a></h3>
+<div class="container-fluid login-main">
+  <div class="row">
+    <div class="col-xl-7 offset-xl-3">
+      <div class="alert alert-danger" role="alert" *ngIf="loginError">
+        {{loginApiMessage}}
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xl-3 col-lg-12 offset-xl-3">
+      <div class="service-info">
+        <h1>User Service</h1>
+        <p class="welcome">Welcome to User Service area</p>
+        <p>To connect with support:</p>
+        <ul>
+          <li class="welcome">+3097 XXX XXXX</li>
+          <li class="welcome">+3097 XXX XXXX</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-xl-3 col-lg-12 offset-xl-1 login-block">
+      <div class="login">
+        <h2>Sign In</h2>
+        <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+          <div class="input-block">
+            <input type="text" formControlName="email" placeholder="Email" />
+            <div *ngIf="loginForm.controls.email.invalid && (loginForm.controls.email.dirty || loginForm.controls.email.touched)" class="error">
+              <div *ngIf="loginForm.controls.email.errors?.required">
+                Please enter an email
+              </div>
+              <div *ngIf="loginForm.controls.email.errors?.pattern">
+                Please enter a valid email
+              </div>
+            </div>
+          </div>
+
+          <div class="input-block">
+            <input type="password" formControlName="password" placeholder="Password" />
+            <div *ngIf="loginForm.controls.password.invalid && (loginForm.controls.password.dirty || loginForm.controls.password.touched)" class="error">
+              <div *ngIf="loginForm.controls.password.errors?.required">
+                Please enter an password
+              </div>
+            </div>
+          </div>
+
+          <button type="submit" [disabled]="!loginForm.valid">Sign In</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

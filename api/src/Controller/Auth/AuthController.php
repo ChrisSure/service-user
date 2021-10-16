@@ -53,7 +53,7 @@ class AuthController extends AbstractController
      */
     public function signIn(Request $request): JsonResponse
     {
-        $data = $request->request->all();
+        $data = json_decode($request->getContent(), true);
 
         $violations = (new UserAuthValidation())->validate($data);
         if ($violations->count() > 0) {
@@ -63,9 +63,7 @@ class AuthController extends AbstractController
         try {
             $token = $this->authService->loginUser($data);
             return new JsonResponse(['token' => $token], JsonResponse::HTTP_OK);
-        } catch (NotFoundHttpException $e) {
-            return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_NOT_FOUND);
-        } catch (AccessDeniedHttpException $e) {
+        } catch (NotFoundHttpException | AccessDeniedHttpException $e) {
             return new JsonResponse(["error" => $e->getMessage()], JsonResponse::HTTP_BAD_REQUEST);
         }
     }

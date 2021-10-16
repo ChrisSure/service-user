@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Validation\Auth;
+namespace App\Validation\User;
 
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Validation;
 
 /**
  * Class UserAuthValidation
- * @package App\Validation\Auth
+ * @package App\Validation\User
  */
 class UpdateUserValidation
 {
