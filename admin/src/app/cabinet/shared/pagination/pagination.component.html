@@ -1,4 +1,4 @@
-<div class="pagination" *ngIf="model.length > 0">
+<div class="pagination" *ngIf="model.length > 0 && this.paginationService.perPage < model.length">
   <nav aria-label="Page navigation example">
     <ul class="pagination">
       <li class="page-item" [ngClass]="{'disabled' : this.paginationService.page === 1}">

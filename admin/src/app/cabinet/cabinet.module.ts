@@ -9,6 +9,7 @@ import { SidebarComponent } from './template/sidebar/sidebar.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { PaginationService } from '../services/cabinet/shared/pagination/pagination.service';
 import { PaginationComponent } from './shared/pagination/pagination.component';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
     HomeComponent,
     CabinetComponent,
     UsersComponent,
-    PaginationComponent
+    PaginationComponent,
+    UserDetailComponent
   ],
   imports: [
     CommonModule,

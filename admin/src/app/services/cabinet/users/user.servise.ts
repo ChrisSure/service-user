@@ -23,6 +23,16 @@ export class UserService {
       .pipe(catchError(this.error));
   }
 
+  public getUserById(id: number): Observable<any> {
+    return this.http.get(this.baseUrl + id, { headers: this.headers })
+      .pipe(catchError(this.error));
+  }
+
+  public removeUser(id: number): Observable<any> {
+    return this.http.delete(this.baseUrl + id, { headers: this.headers })
+      .pipe(catchError(this.error));
+  }
+
   error(error: HttpErrorResponse): Observable<any> {
     return new Observable<any>(observer => {
       observer.next(error.error);

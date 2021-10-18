@@ -9,7 +9,7 @@ export class PaginationService {
   private _page: number = 1;
   public totalUsers: number = 0;
   public maxPages: number = 0;
-  public perPage: number = 1;
+  public perPage: number = 20;
   public initializaPagination: BehaviorSubject<any> = new BehaviorSubject(null);
 
   public get page(): number {

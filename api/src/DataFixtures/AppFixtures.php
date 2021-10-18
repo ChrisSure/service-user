@@ -80,6 +80,7 @@ class AppFixtures extends Fixture
         $moderator->setPasswordHash($this->passwordHashService->hashPassword($user, '123'));
         $moderator->setStatus($user::$STATUS_ACTIVE);
         $moderator->setPermission($permission1);
+        $moderator->setPermission($permission2);
         $moderator->onPrePersist();
         $moderator->onPreUpdate();
 

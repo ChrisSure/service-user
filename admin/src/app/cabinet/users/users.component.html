@@ -48,7 +48,7 @@
         <td>
           <span class="badge bg-secondary" [className]="'badge bg-secondary badge-' + user.status">{{user.status}}</span>
         </td>
-        <td><button type="button" class="btn btn-primary">Open</button></td>
+        <td><a class="btn btn-primary" [routerLink]="['/cabinet/users/' + user.id]">Open</a></td>
       </tr>
       </tbody>
     </table>

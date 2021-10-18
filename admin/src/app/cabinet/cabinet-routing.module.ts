@@ -4,6 +4,7 @@ import { CabinetComponent } from './cabinet.component';
 import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
 import { CabinetGuard } from './cabinet.guard';
+import { UserDetailComponent } from './users/user-detail/user-detail.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent,
+      },
+      {
+        path: 'users/:id',
+        component: UserDetailComponent,
       },
     ],
   },
