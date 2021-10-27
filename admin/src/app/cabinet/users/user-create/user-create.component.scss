@@ -1,0 +1,14 @@
+@import 'src/assets/scss/base';
+
+.user-create {
+  .input-block {
+    margin-bottom: 20px;
+    width: 50%;
+  }
+
+  .error {
+    font-size: 10px;
+    color: $base-red;
+    position: absolute;
+  }
+}

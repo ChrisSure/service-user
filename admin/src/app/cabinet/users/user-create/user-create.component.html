@@ -1,0 +1,43 @@
+<div class="user-create">
+  <div class="alert alert-{{responseMessageType}}" role="alert" *ngIf="responseMessage && responseMessageType">
+    {{responseMessage}}
+  </div>
+  <form [formGroup]="createUserForm" (ngSubmit)="onSubmit()">
+    <div class="input-block">
+      <input type="text" class="form-control" formControlName="email" placeholder="Email" />
+      <div *ngIf="createUserForm.controls.email.invalid && (createUserForm.controls.email.dirty || createUserForm.controls.email.touched)" class="error">
+        <div *ngIf="createUserForm.controls.email.errors?.required">
+          Please enter an email
+        </div>
+        <div *ngIf="createUserForm.controls.email.errors?.pattern">
+          Please enter a valid email
+        </div>
+      </div>
+    </div>
+    <div class="input-block">
+      <input type="text" class="form-control" formControlName="password" placeholder="Password" />
+      <div *ngIf="createUserForm.controls.password.invalid && (createUserForm.controls.password.dirty || createUserForm.controls.password.touched)" class="error">
+        <div *ngIf="createUserForm.controls.password.errors?.required">
+          Please enter an password
+        </div>
+      </div>
+    </div>
+    <div class="input-block">
+      <select class="form-select" aria-label="Default select example" formControlName="role">
+        <option value="0">Role</option>
+        <ng-container *ngFor="let role of roles">
+          <option value="{{role.key}}">{{role.title}}</option>
+        </ng-container>
+      </select>
+    </div>
+    <div class="input-block">
+      <select class="form-select" aria-label="Default select example" formControlName="status">
+        <option value="0">Status</option>
+        <ng-container *ngFor="let status of statuses">
+          <option value="{{status.key}}">{{status.title}}</option>
+        </ng-container>
+      </select>
+    </div>
+    <button type="submit" class="btn btn-success" [disabled]="!createUserForm.valid">Create</button>
+  </form>
+</div>

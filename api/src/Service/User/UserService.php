@@ -102,7 +102,7 @@ class UserService
         $user = new User();
         $user->setEmail($data['email']);
         $user->setPasswordHash($this->passwordHashService->hashPassword($user, $data['password']));
-        $user->setRoles($data['role']);
+        $user->setRoles($data['roles']);
         $user->setStatus($data['status'])->onPrePersist()->onPreUpdate();
         $this->userRepository->save($user);
         return $user;

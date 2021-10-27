@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { PaginationService } from '../services/cabinet/shared/pagination/pagination.service';
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { UserCreateComponent } from './users/user-create/user-create.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { UserDetailComponent } from './users/user-detail/user-detail.component';
     CabinetComponent,
     UsersComponent,
     PaginationComponent,
-    UserDetailComponent
+    UserDetailComponent,
+    UserCreateComponent
   ],
   imports: [
     CommonModule,

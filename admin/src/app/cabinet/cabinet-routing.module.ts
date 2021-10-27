@@ -5,6 +5,7 @@ import { HomeComponent } from './home/home.component';
 import { UsersComponent } from './users/users.component';
 import { CabinetGuard } from './cabinet.guard';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
+import { UserCreateComponent } from './users/user-create/user-create.component';
 
 const routes: Routes = [
   {
@@ -17,6 +18,10 @@ const routes: Routes = [
       {
         path: 'users',
         component: UsersComponent,
+      },
+      {
+        path: 'users/create',
+        component: UserCreateComponent,
       },
       {
         path: 'users/:id',

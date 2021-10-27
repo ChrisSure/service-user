@@ -32,7 +32,7 @@ class CreateUserValidation
                         new Assert\NotBlank(),
                         new Assert\Length(['min' => 2])
                     ],
-                'role' =>
+                'roles' =>
                     [
                         new Assert\NotBlank()
                     ],

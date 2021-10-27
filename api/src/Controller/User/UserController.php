@@ -83,7 +83,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("",  methods={"POST"})
+     * @Route("/",  methods={"POST"})
      * Create users
      *
      * @param Request $request
@@ -91,7 +91,7 @@ class UserController extends AbstractController
      */
     public function create(Request $request): JsonResponse
     {
-        $data = $request->request->all();
+        $data = json_decode($request->getContent(), true);
 
         $violations = (new CreateUserValidation())->validate($data);
         if ($violations->count() > 0) {

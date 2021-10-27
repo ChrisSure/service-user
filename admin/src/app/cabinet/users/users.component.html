@@ -25,6 +25,10 @@
     </form>
     <hr>
   </div>
+  <div class="user-create">
+    <a [routerLink]="['/cabinet/users/create']" class="btn btn-success">Create user</a>
+    <hr>
+  </div>
   <div class="users-table">
     <table class="table" *ngIf="users.length > 0;else no_users">
       <thead>
