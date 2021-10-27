@@ -11,6 +11,7 @@ import { PaginationService } from '../services/cabinet/shared/pagination/paginat
 import { PaginationComponent } from './shared/pagination/pagination.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { UserCreateComponent } from './users/user-create/user-create.component';
     UsersComponent,
     PaginationComponent,
     UserDetailComponent,
-    UserCreateComponent
+    UserCreateComponent,
+    UserEditComponent
   ],
   imports: [
     CommonModule,

@@ -119,10 +119,10 @@ class UserService
     {
         $user = $this->userRepository->get($id);
         $user->setEmail($data['email']);
-        if ($data['password'] !== '') {
+        if (array_key_exists('password', $data) && $data['password'] !== '') {
             $user->setPasswordHash($this->passwordHashService->hashPassword($user, $data['password']));
         }
-        $user->setRoles($data['role']);
+        $user->setRoles($data['roles']);
         $user->setStatus($data['status'])->onPreUpdate();
         $this->userRepository->save($user);
         return $user;

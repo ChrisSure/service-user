@@ -114,7 +114,7 @@ class UserController extends AbstractController
      */
     public function update(Request $request, $id): JsonResponse
     {
-        $data = $request->request->all();
+        $data = json_decode($request->getContent(), true);
 
         $violations = (new UpdateUserValidation())->validate($data);
         if ($violations->count() > 0) {

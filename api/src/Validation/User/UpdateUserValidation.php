@@ -27,11 +27,7 @@ class UpdateUserValidation
                         new Assert\NotBlank(),
                         new Assert\Email()
                     ],
-                'password' =>
-                    [
-
-                    ],
-                'role' =>
+                'roles' =>
                     [
                         new Assert\NotBlank()
                     ],

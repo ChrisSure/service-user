@@ -6,6 +6,7 @@ import { UsersComponent } from './users/users.component';
 import { CabinetGuard } from './cabinet.guard';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
+import { UserEditComponent } from './users/user-edit/user-edit.component';
 
 const routes: Routes = [
   {
@@ -22,6 +23,10 @@ const routes: Routes = [
       {
         path: 'users/create',
         component: UserCreateComponent,
+      },
+      {
+        path: 'users/edit/:id',
+        component: UserEditComponent,
       },
       {
         path: 'users/:id',

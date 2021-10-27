@@ -53,7 +53,7 @@
     </div>
     <div class="row">
       <div class="col-12 mt-3">
-        <button type="button" class="btn btn-primary me-3">Edit</button>
+        <a type="button" class="btn btn-primary me-3" [routerLink]="['/cabinet/users/edit/' + user.id]">Edit</a>
         <button type="button" class="btn btn-danger" (click)="removeUser(user.id)">Remove</button>
       </div>
     </div>

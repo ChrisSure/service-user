@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpErrorResponse, HttpHeaders} from '@angular/common/http';
-import {Observable} from "rxjs";
-import {catchError} from "rxjs/operators";
-import {TokenService} from "../../token/token.service";
-import {UserCreateDto} from "../../../models/cabinet/users/dtos/user-create-dto";
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { catchError } from 'rxjs/operators';
+import { TokenService } from '../../token/token.service';
+import { UserCreateDto } from '../../../models/cabinet/users/dtos/user-create-dto';
+import { UserEditDto } from '../../../models/cabinet/users/dtos/user-edit-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -31,6 +32,11 @@ export class UserService {
 
   public createUser(user: UserCreateDto): Observable<any> {
     return this.http.post(this.baseUrl, user, { headers: this.headers })
+      .pipe(catchError(this.error));
+  }
+
+  public editUser(id: number, user: UserEditDto): Observable<any> {
+    return this.http.put(this.baseUrl + id, user, { headers: this.headers })
       .pipe(catchError(this.error));
   }
 
