@@ -6,6 +6,7 @@ use App\Exception\DbException;
 use App\Service\User\UserService;
 use App\Validation\User\CreateUserValidation;
 use App\Validation\User\UpdateUserValidation;
+use App\Validation\User\UpdateUserPasswordValidation;
 use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -147,6 +148,31 @@ class UserController extends AbstractController
             return new JsonResponse(['message' => "User was deleted"], Response::HTTP_OK);
         } catch(NotFoundHttpException $e) {
             return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    /**
+     * @Route("/{id}/update-password",  methods={"PUT"})
+     * Update user password
+     *
+     * @return JsonResponse
+     */
+    public function updatePassword(Request $request, $id): JsonResponse
+    {
+        $data = json_decode($request->getContent(), true);
+
+        $violations = (new UpdateUserPasswordValidation())->validate($data);
+        if ($violations->count() > 0) {
+            return new JsonResponse(["error" => (string)$violations], Response::HTTP_BAD_REQUEST);
+        }
+
+        try {
+            $this->userService->updatePassword($data, $id);
+            return new JsonResponse(['message' => "Updated successful"], Response::HTTP_OK);
+        } catch(NotFoundHttpException $e) {
+            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
+        } catch(\InvalidArgumentException $e) {
+            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
         }
     }
 

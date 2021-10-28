@@ -129,6 +129,24 @@ class UserService
     }
 
     /**
+     * Update user password
+     *
+     * @param array $data
+     * @param int $id
+     * @return User
+     */
+    public function updatePassword(array $data, int $id): User
+    {
+        $user = $this->userRepository->get($id);
+        if (array_key_exists('password', $data) && $data['password'] !== '') {
+            $user->setPasswordHash($this->passwordHashService->hashPassword($user, $data['password']));
+        }
+        $user->onPreUpdate();
+        $this->userRepository->save($user);
+        return $user;
+    }
+
+    /**
      * Delete user
      *
      * @param $id

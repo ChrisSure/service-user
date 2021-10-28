@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Validation;
 class CreateUserValidation
 {
     /**
-     * Validor for login
+     * Validator for create user
      * @param array $data
      * @return ConstraintViolationListInterface
      */

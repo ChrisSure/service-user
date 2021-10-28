@@ -29,8 +29,12 @@ class UpdateUserControllerTest extends Base
     public function updateNotFound(): void
     {
         $this->signIn(User::$ROLE_ADMIN);
-        $data = ['email' => 'super_admin@gmail.com', 'password' => '123', 'role' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE];
-        $this->client->request('PUT', '/users/235', $data);
+        $data = json_encode(['email' => 'super_admin@gmail.com', 'roles' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE]);
+        $this->client->request(
+            'PUT',
+            '/users/235',
+            [], [], [], $data
+        );
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals(Response::HTTP_NOT_FOUND, $this->client->getResponse()->getStatusCode());
@@ -43,8 +47,12 @@ class UpdateUserControllerTest extends Base
     public function createAlreadyIssetEmail(): void
     {
         $this->signIn(User::$ROLE_ADMIN);
-        $data = ['email' => 'super_admin@gmail.com', 'password' => '123', 'role' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE];
-        $this->client->request('PUT', '/users/3', $data);
+        $data = json_encode(['email' => 'super_admin@gmail.com', 'roles' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE]);
+        $this->client->request(
+            'PUT',
+            '/users/3',
+            [], [], [], $data
+        );
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals(Response::HTTP_BAD_REQUEST, $this->client->getResponse()->getStatusCode());
@@ -57,8 +65,12 @@ class UpdateUserControllerTest extends Base
     public function updateSuccessfull(): void
     {
         $this->signIn(User::$ROLE_ADMIN);
-        $data = ['email' => 'admin_test@gmail.com', 'password' => '123', 'role' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE];
-        $this->client->request('PUT', '/users/3', $data);
+        $data = json_encode(['email' => 'admin_test@gmail.com', 'roles' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE]);
+        $this->client->request(
+            'PUT',
+            '/users/3',
+            [], [], [], $data
+        );
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());

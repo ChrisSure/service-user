@@ -7,13 +7,13 @@ use Symfony\Component\Validator\ConstraintViolationListInterface;
 use Symfony\Component\Validator\Validation;
 
 /**
- * Class UserAuthValidation
+ * Class UpdateUserPasswordValidation
  * @package App\Validation\User
  */
-class UpdateUserValidation
+class UpdateUserPasswordValidation
 {
     /**
-     * Validator for update user
+     * Validator for change password
      * @param array $data
      * @return ConstraintViolationListInterface
      */
@@ -22,20 +22,11 @@ class UpdateUserValidation
         $validator = Validation::createValidator();
         $constraint = new Assert\Collection(
             [
-                'email' =>
+                'password' =>
                     [
                         new Assert\NotBlank(),
-                        new Assert\Email()
+                        new Assert\Length(['min' => 2])
                     ],
-                'roles' =>
-                    [
-                        new Assert\NotBlank()
-                    ],
-                'status' =>
-                    [
-                        new Assert\NotBlank()
-                    ]
-
             ]
         );
         return $validator->validate($data, $constraint);

@@ -4,17 +4,18 @@ namespace App\Tests\Unit\Validation\User;
 
 use App\Entity\User\User;
 use App\Tests\Unit\Base;
+use App\Validation\User\UpdateUserPasswordValidation;
 use App\Validation\User\UpdateUserValidation;
 
-class UpdateUserValidationTest extends Base
+class UpdateUserPasswordValidationTest extends Base
 {
     /**
      * @test
      */
     public function successValidate(): void
     {
-        $validate = new UpdateUserValidation();
-        $data = ['email' => $this->faker->email, 'roles' => User::$ROLE_USER, 'status' => User::$STATUS_NEW];
+        $validate = new UpdateUserPasswordValidation();
+        $data = ['password' => $this->faker->password];
         $result = $validate->validate($data);
 
         $this->assertEquals(0, $result->count());
@@ -25,10 +26,10 @@ class UpdateUserValidationTest extends Base
      */
     public function failureValidate(): void
     {
-        $validate = new UpdateUserValidation();
-        $data = ['email' => $this->faker->title];
+        $validate = new UpdateUserPasswordValidation();
+        $data = ['password' => ''];
         $result = $validate->validate($data);
 
-        $this->assertEquals(3, $result->count());
+        $this->assertEquals(2, $result->count());
     }
 }

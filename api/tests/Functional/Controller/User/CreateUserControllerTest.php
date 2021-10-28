@@ -14,8 +14,12 @@ class CreateUserControllerTest extends Base
     public function createErrorValidation(): void
     {
         $this->signIn(User::$ROLE_ADMIN);
-        $data = ['email' => ''];
-        $this->client->request('POST', '/users', $data);
+        $data = json_encode(['email' => '']);
+        $this->client->request(
+            'POST',
+            '/users/',
+            [], [], [], $data
+        );
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_BAD_REQUEST);
@@ -28,8 +32,12 @@ class CreateUserControllerTest extends Base
     public function createAlreadyIssetEmail(): void
     {
         $this->signIn(User::$ROLE_ADMIN);
-        $data = ['email' => 'admin@gmail.com', 'password' => '123', 'role' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE];
-        $this->client->request('POST', '/users', $data);
+        $data = json_encode(['email' => 'admin@gmail.com', 'password' => '123', 'roles' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE]);
+        $this->client->request(
+            'POST',
+            '/users/',
+            [], [], [], $data
+        );
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_BAD_REQUEST);
@@ -42,8 +50,12 @@ class CreateUserControllerTest extends Base
     public function createSuccessfull(): void
     {
         $this->signIn(User::$ROLE_ADMIN);
-        $data = ['email' => $email = 'admin_test@gmail.com', 'password' => '123', 'role' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE];
-        $this->client->request('POST', '/users', $data);
+        $data = json_encode(['email' => $email = 'admin_test@gmail.com', 'password' => '123', 'roles' => User::$ROLE_ADMIN, 'status' => User::$STATUS_ACTIVE]);
+        $this->client->request(
+            'POST',
+            '/users/',
+            [], [], [], $data
+        );
         $response = json_decode($this->client->getResponse()->getContent());
 
         $this->assertEquals($this->client->getResponse()->getStatusCode(), JsonResponse::HTTP_CREATED);

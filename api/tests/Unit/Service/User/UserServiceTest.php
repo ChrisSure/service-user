@@ -22,6 +22,8 @@ class UserServiceTest extends Base
 
     private $arrayData;
 
+    private $arrayPasswordData;
+
     protected function setUp(): void
     {
         parent::setUp();
@@ -29,7 +31,8 @@ class UserServiceTest extends Base
         $this->userRepositoryMock = Mockery::mock(UserRepository::class);
         $this->serializeServiceMock = Mockery::mock(SerializeService::class);
         $this->passwordServiceMock = Mockery::mock(PasswordHashService::class);
-        $this->arrayData = ['email' => 'test@gmail.com', 'password' => 123, 'status' => User::$STATUS_NEW, 'role' => User::$ROLE_USER];
+        $this->arrayData = ['email' => 'test@gmail.com', 'password' => 123, 'status' => User::$STATUS_NEW, 'roles' => User::$ROLE_USER];
+        $this->arrayPasswordData = ['password' => 123];
     }
 
     /**
@@ -129,6 +132,30 @@ class UserServiceTest extends Base
 
         $this->assertTrue($typeObject);
         $this->assertEquals($this->arrayData['email'], $result->getEmail());
+    }
+
+    /**
+     * @test
+     */
+    public function updatePassword()
+    {
+        $passwordHash = $this->faker->sentence;
+        $this->userRepositoryMock->shouldReceive('get')->andReturn($this->userMock);
+        $this->userMock->shouldReceive('setPasswordHash')->andReturn($this->userMock);
+        $this->userMock->shouldReceive('getPasswordHash')->andReturn($passwordHash);
+        $this->userMock->shouldReceive('onPreUpdate')->andReturn($this->userMock);
+        $this->userRepositoryMock->shouldReceive('save')->andReturn(null);
+        $this->passwordServiceMock->shouldReceive('hashPassword')->andReturn($passwordHash);
+        $userService = new UserService($this->userRepositoryMock, $this->serializeServiceMock, $this->passwordServiceMock);
+        $result = $userService->updatePassword($this->arrayPasswordData, $this->faker->randomDigit);
+
+        $typeObject = false;
+        if ($result instanceof User) {
+            $typeObject = true;
+        }
+
+        $this->assertTrue($typeObject);
+        $this->assertEquals($passwordHash, $result->getPasswordHash());
     }
 
     /**
