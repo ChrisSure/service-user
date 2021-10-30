@@ -8,7 +8,6 @@ use App\Entity\User\User;
 use App\Service\Auth\PasswordHashService;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Faker\Factory;
 
 class AppFixtures extends Fixture
@@ -44,12 +43,14 @@ class AppFixtures extends Fixture
         // Create Permissions
         $permission1 = new Permission();
         $permission1->setName('Permission 1');
+        $permission1->setDescription('Permission 1 description');
         $permission1->setStatus(Permission::$STATUS_ACTIVE);
         $permission1->onPrePersist();
         $permission1->onPreUpdate();
 
         $permission2 = new Permission();
         $permission2->setName('Permission 2');
+        $permission2->setDescription('Permission 2 description');
         $permission2->setStatus(Permission::$STATUS_NEW);
         $permission2->onPrePersist();
         $permission2->onPreUpdate();

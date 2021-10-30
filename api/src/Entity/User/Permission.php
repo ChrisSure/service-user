@@ -30,6 +30,11 @@ class Permission
     private $name;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $description;
+
+    /**
      * @var string The status of post
      * @ORM\Column(type="string")
      * @Assert\NotBlank
@@ -84,6 +89,24 @@ class Permission
     public function setName($name): self
     {
         $this->name = $name;
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription(): string
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param mixed $description
+     * @return self
+     */
+    public function setDescription($description): self
+    {
+        $this->description = $description;
         return $this;
     }
 

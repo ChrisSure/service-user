@@ -14,7 +14,7 @@ class PermissionValidationTest extends Base
     public function successValidate(): void
     {
         $validate = new PermissionValidation();
-        $data = ['name' => $this->faker->title, 'status' => User::$STATUS_NEW];
+        $data = ['name' => $this->faker->title, 'description' => $this->faker->text, 'status' => User::$STATUS_NEW];
         $result = $validate->validate($data);
 
         $this->assertEquals(0, $result->count());
@@ -29,6 +29,6 @@ class PermissionValidationTest extends Base
         $data = ['name' => ''];
         $result = $validate->validate($data);
 
-        $this->assertEquals(3, $result->count());
+        $this->assertEquals(4, $result->count());
     }
 }

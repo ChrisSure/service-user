@@ -92,6 +92,7 @@ class PermissionService
 
         $permission = new Permission();
         $permission->setName($data['name']);
+        $permission->setDescription($data['description']);
         $permission->setStatus($data['status'])->onPrePersist()->onPreUpdate();
         try {
             $this->permissionRepository->save($permission);
@@ -113,6 +114,7 @@ class PermissionService
     {
         $permission = $this->permissionRepository->get($id);
         $permission->setName($data['name']);
+        $permission->setDescription($data['description']);
         $permission->setStatus($data['status'])->onPreUpdate();
         try {
             $this->permissionRepository->save($permission);

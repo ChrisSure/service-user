@@ -29,7 +29,7 @@ class CreatePermissionControllerTest extends Base
     public function createAlreadyIssetEmail(): void
     {
         $this->signIn(User::$ROLE_ADMIN);
-        $data = ['name' => 'Permission 1', 'status' => Permission::$STATUS_ACTIVE];
+        $data = ['name' => 'Permission 1', 'description' => 'Permission 1 description', 'status' => Permission::$STATUS_ACTIVE];
         $this->client->request('POST', '/permissions', $data);
         $response = json_decode($this->client->getResponse()->getContent());
 
@@ -43,7 +43,7 @@ class CreatePermissionControllerTest extends Base
     public function createSuccessfull(): void
     {
         $this->signIn(User::$ROLE_ADMIN);
-        $data = ['name' => $name = 'Permission 99', 'status' => Permission::$STATUS_ACTIVE];
+        $data = ['name' => $name = 'Permission 99', 'description' => 'Permission 99 description', 'status' => Permission::$STATUS_ACTIVE];
         $this->client->request('POST', '/permissions', $data);
         $response = json_decode($this->client->getResponse()->getContent());
 

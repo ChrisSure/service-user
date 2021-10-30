@@ -42,6 +42,7 @@ class DeletePermissionControllerTest extends Base
     {
         $permission = new Permission();
         $permission->setName('Permission 99');
+        $permission->setDescription('Permission 99 description');
         $permission->setStatus(Permission::$STATUS_ACTIVE);
         $permission->onPrePersist()->onPreUpdate();
         $this->manager->persist($permission);

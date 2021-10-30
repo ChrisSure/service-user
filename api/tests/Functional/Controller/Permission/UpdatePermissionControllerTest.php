@@ -29,7 +29,7 @@ class UpdatePermissionControllerTest extends Base
     public function updateNotFound(): void
     {
         $this->signIn(User::$ROLE_ADMIN);
-        $data = ['name' => 'Permission 99', 'status' => Permission::$STATUS_ACTIVE];
+        $data = ['name' => 'Permission 99', 'description' => 'Permission 99 description', 'status' => Permission::$STATUS_ACTIVE];
         $this->client->request('PUT', '/permissions/123', $data);
         $response = json_decode($this->client->getResponse()->getContent());
 
@@ -43,7 +43,7 @@ class UpdatePermissionControllerTest extends Base
     public function createAlreadyIssetName(): void
     {
         $this->signIn(User::$ROLE_ADMIN);
-        $data = ['name' => 'Permission 2', 'status' => Permission::$STATUS_ACTIVE];
+        $data = ['name' => 'Permission 2', 'description' => 'Permission 2 description', 'status' => Permission::$STATUS_ACTIVE];
         $this->client->request('PUT', '/permissions/1', $data);
         $response = json_decode($this->client->getResponse()->getContent());
 
@@ -57,7 +57,7 @@ class UpdatePermissionControllerTest extends Base
     public function updateSuccessfull(): void
     {
         $this->signIn(User::$ROLE_ADMIN);
-        $data = ['name' => $name = 'Permission 99', 'status' => Permission::$STATUS_ACTIVE];
+        $data = ['name' => $name = 'Permission 99', 'description' => 'Permission 99 description', 'status' => Permission::$STATUS_ACTIVE];
         $this->client->request('PUT', '/permissions/1', $data);
         $response = json_decode($this->client->getResponse()->getContent());
 
@@ -71,6 +71,7 @@ class UpdatePermissionControllerTest extends Base
     {
         $permission = $this->doctrine->getRepository(Permission::class)->findOneBy(['name' => $name]);
         $permission->setName('Permission 1');
+        $permission->setDescription('Permission 1 description');
         $this->manager->persist($permission);
         $this->manager->flush();
     }

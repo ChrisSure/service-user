@@ -14,9 +14,11 @@ class PermissionEntityTest extends Base
     {
         $permission = new Permission();
         $permission->setName($name = $this->faker->title);
+        $permission->setDescription($description = $this->faker->text);
         $permission->setStatus($status = $permission::$STATUS_ACTIVE);
 
         $this->assertEquals($name, $permission->getName());
+        $this->assertEquals($description, $permission->getDescription());
         $this->assertEquals($status, $permission->getStatus());
     }
 }

@@ -4,7 +4,6 @@ namespace App\Tests\Unit\Service\User;
 
 use App\Entity\User\Permission;
 use App\Repository\User\PermissionRepository;
-use App\Service\Auth\PasswordHashService;
 use App\Service\Helper\SerializeService;
 use App\Service\User\PermissionService;
 use App\Tests\Unit\Base;
@@ -26,7 +25,7 @@ class PermissionServiceTest extends Base
         $this->permissionMock = Mockery::mock(Permission::class);
         $this->permissionRepositoryMock = Mockery::mock(PermissionRepository::class);
         $this->serializeServiceMock = Mockery::mock(SerializeService::class);
-        $this->arrayData = ['name' => 'Permission 4', 'status' => Permission::$STATUS_NEW];
+        $this->arrayData = ['name' => 'Permission 4', 'description' => 'Permission 4 description', 'status' => Permission::$STATUS_NEW];
     }
 
     /**
@@ -84,6 +83,7 @@ class PermissionServiceTest extends Base
 
         $this->assertTrue($typeObject);
         $this->assertEquals($this->arrayData['name'], $result->getName());
+        $this->assertEquals($this->arrayData['description'], $result->getDescription());
     }
 
     /**
@@ -108,8 +108,10 @@ class PermissionServiceTest extends Base
         $this->permissionRepositoryMock->shouldReceive('get')->andReturn($this->permissionMock);
         $this->permissionMock->shouldReceive('setName')->andReturn($this->permissionMock);
         $this->permissionMock->shouldReceive('setStatus')->andReturn($this->permissionMock);
+        $this->permissionMock->shouldReceive('setDescription')->andReturn($this->permissionMock);
         $this->permissionMock->shouldReceive('onPreUpdate')->andReturn($this->permissionMock);
         $this->permissionMock->shouldReceive('getName')->andReturn($this->arrayData['name']);
+        $this->permissionMock->shouldReceive('getDescription')->andReturn($this->arrayData['description']);
         $this->permissionRepositoryMock->shouldReceive('save')->andReturn(null);
         $permissionService = new PermissionService($this->permissionRepositoryMock, $this->serializeServiceMock);
         $result = $permissionService->update($this->arrayData, $this->faker->randomDigit);
@@ -121,6 +123,7 @@ class PermissionServiceTest extends Base
 
         $this->assertTrue($typeObject);
         $this->assertEquals($this->arrayData['name'], $result->getName());
+        $this->assertEquals($this->arrayData['description'], $result->getDescription());
     }
 
     /**

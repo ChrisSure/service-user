@@ -27,6 +27,7 @@ class PermissionValidation
                         new Assert\NotBlank(),
                         new Assert\Length(['min' => 2])
                     ],
+                'description' => [],
                 'status' =>
                     [
                         new Assert\NotBlank()
