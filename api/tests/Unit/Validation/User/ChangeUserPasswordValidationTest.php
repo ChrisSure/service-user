@@ -2,19 +2,17 @@
 
 namespace App\Tests\Unit\Validation\User;
 
-use App\Entity\User\User;
 use App\Tests\Unit\Base;
-use App\Validation\User\UpdateUserPasswordValidation;
-use App\Validation\User\UpdateUserValidation;
+use App\Validation\User\ChangeUserPasswordValidation;
 
-class UpdateUserPasswordValidationTest extends Base
+class ChangeUserPasswordValidationTest extends Base
 {
     /**
      * @test
      */
     public function successValidate(): void
     {
-        $validate = new UpdateUserPasswordValidation();
+        $validate = new ChangeUserPasswordValidation();
         $data = ['password' => $this->faker->password];
         $result = $validate->validate($data);
 
@@ -26,7 +24,7 @@ class UpdateUserPasswordValidationTest extends Base
      */
     public function failureValidate(): void
     {
-        $validate = new UpdateUserPasswordValidation();
+        $validate = new ChangeUserPasswordValidation();
         $data = ['password' => ''];
         $result = $validate->validate($data);
 

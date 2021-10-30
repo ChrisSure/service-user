@@ -5,6 +5,7 @@ import { catchError } from 'rxjs/operators';
 import { TokenService } from '../../token/token.service';
 import { UserCreateDto } from '../../../models/cabinet/users/dtos/user-create-dto';
 import { UserEditDto } from '../../../models/cabinet/users/dtos/user-edit-dto';
+import { UserChangePasswordDto } from '../../../models/cabinet/users/dtos/user-change-password-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +38,11 @@ export class UserService {
 
   public editUser(id: number, user: UserEditDto): Observable<any> {
     return this.http.put(this.baseUrl + id, user, { headers: this.headers })
+      .pipe(catchError(this.error));
+  }
+
+  public changePasswordUser(id: number, password: UserChangePasswordDto): Observable<any> {
+    return this.http.put(this.baseUrl + id + '/change-password', password, { headers: this.headers })
       .pipe(catchError(this.error));
   }
 

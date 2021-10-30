@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Validation;
  * Class UpdateUserPasswordValidation
  * @package App\Validation\User
  */
-class UpdateUserPasswordValidation
+class ChangeUserPasswordValidation
 {
     /**
      * Validator for change password

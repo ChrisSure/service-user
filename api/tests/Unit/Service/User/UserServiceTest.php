@@ -137,7 +137,7 @@ class UserServiceTest extends Base
     /**
      * @test
      */
-    public function updatePassword()
+    public function changePassword()
     {
         $passwordHash = $this->faker->sentence;
         $this->userRepositoryMock->shouldReceive('get')->andReturn($this->userMock);
@@ -147,7 +147,7 @@ class UserServiceTest extends Base
         $this->userRepositoryMock->shouldReceive('save')->andReturn(null);
         $this->passwordServiceMock->shouldReceive('hashPassword')->andReturn($passwordHash);
         $userService = new UserService($this->userRepositoryMock, $this->serializeServiceMock, $this->passwordServiceMock);
-        $result = $userService->updatePassword($this->arrayPasswordData, $this->faker->randomDigit);
+        $result = $userService->changePassword($this->arrayPasswordData, $this->faker->randomDigit);
 
         $typeObject = false;
         if ($result instanceof User) {

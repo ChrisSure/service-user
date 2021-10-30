@@ -12,6 +12,7 @@ import { PaginationComponent } from './shared/pagination/pagination.component';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { UserChangePasswordComponent } from './users/user-change-password/user-change-password.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserEditComponent } from './users/user-edit/user-edit.component';
     PaginationComponent,
     UserDetailComponent,
     UserCreateComponent,
-    UserEditComponent
+    UserEditComponent,
+    UserChangePasswordComponent
   ],
   imports: [
     CommonModule,

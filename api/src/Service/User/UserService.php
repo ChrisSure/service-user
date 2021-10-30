@@ -129,13 +129,13 @@ class UserService
     }
 
     /**
-     * Update user password
+     * Change user password
      *
      * @param array $data
      * @param int $id
      * @return User
      */
-    public function updatePassword(array $data, int $id): User
+    public function changePassword(array $data, int $id): User
     {
         $user = $this->userRepository->get($id);
         if (array_key_exists('password', $data) && $data['password'] !== '') {

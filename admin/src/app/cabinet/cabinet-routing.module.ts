@@ -7,6 +7,7 @@ import { CabinetGuard } from './cabinet.guard';
 import { UserDetailComponent } from './users/user-detail/user-detail.component';
 import { UserCreateComponent } from './users/user-create/user-create.component';
 import { UserEditComponent } from './users/user-edit/user-edit.component';
+import { UserChangePasswordComponent } from './users/user-change-password/user-change-password.component';
 
 const routes: Routes = [
   {
@@ -27,6 +28,10 @@ const routes: Routes = [
       {
         path: 'users/edit/:id',
         component: UserEditComponent,
+      },
+      {
+        path: 'users/change-password/:id',
+        component: UserChangePasswordComponent,
       },
       {
         path: 'users/:id',

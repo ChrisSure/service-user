@@ -6,7 +6,7 @@ use App\Exception\DbException;
 use App\Service\User\UserService;
 use App\Validation\User\CreateUserValidation;
 use App\Validation\User\UpdateUserValidation;
-use App\Validation\User\UpdateUserPasswordValidation;
+use App\Validation\User\ChangeUserPasswordValidation;
 use Doctrine\DBAL\DBALException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -152,7 +152,7 @@ class UserController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/update-password",  methods={"PUT"})
+     * @Route("/{id}/change-password",  methods={"PUT"})
      * Update user password
      *
      * @return JsonResponse
@@ -161,14 +161,14 @@ class UserController extends AbstractController
     {
         $data = json_decode($request->getContent(), true);
 
-        $violations = (new UpdateUserPasswordValidation())->validate($data);
+        $violations = (new ChangeUserPasswordValidation())->validate($data);
         if ($violations->count() > 0) {
             return new JsonResponse(["error" => (string)$violations], Response::HTTP_BAD_REQUEST);
         }
 
         try {
-            $this->userService->updatePassword($data, $id);
-            return new JsonResponse(['message' => "Updated successful"], Response::HTTP_OK);
+            $this->userService->changePassword($data, $id);
+            return new JsonResponse(['message' => "Changed successful"], Response::HTTP_OK);
         } catch(NotFoundHttpException $e) {
             return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
         } catch(\InvalidArgumentException $e) {
