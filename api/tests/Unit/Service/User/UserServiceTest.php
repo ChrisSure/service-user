@@ -2,12 +2,14 @@
 
 namespace App\Tests\Unit\Service\User;
 
+use App\Entity\User\Permission;
 use App\Entity\User\User;
 use App\Repository\User\UserRepository;
 use App\Service\Auth\PasswordHashService;
 use App\Service\Helper\SerializeService;
 use App\Service\User\UserService;
 use App\Tests\Unit\Base;
+use Doctrine\Common\Collections\ArrayCollection;
 use Mockery;
 
 class UserServiceTest extends Base
@@ -156,6 +158,30 @@ class UserServiceTest extends Base
 
         $this->assertTrue($typeObject);
         $this->assertEquals($passwordHash, $result->getPasswordHash());
+    }
+
+    /**
+     * @test
+     */
+    public function assignPermission()
+    {
+        $permissionMock = Mockery::mock(Permission::class);
+        $this->userRepositoryMock->shouldReceive('get')->andReturn($this->userMock);
+        $this->userMock->shouldReceive('setPermission')->andReturn($this->userMock);
+        $this->userMock->shouldReceive('getPermission')->andReturn(new ArrayCollection([$permissionMock]));
+        $this->userMock->shouldReceive('onPreUpdate')->andReturn($this->userMock);
+        $this->userRepositoryMock->shouldReceive('save')->andReturn(null);
+
+        $userService = new UserService($this->userRepositoryMock, $this->serializeServiceMock, $this->passwordServiceMock);
+        $result = $userService->assignPermission($this->faker->randomDigit, $permissionMock);
+
+        $typeObject = false;
+        if ($result instanceof User) {
+            $typeObject = true;
+        }
+
+        $this->assertTrue($typeObject);
+        $this->assertEquals($permissionMock, $result->getPermission()[0]);
     }
 
     /**

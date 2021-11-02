@@ -1,5 +1,5 @@
 export interface UserEditDto {
   email: string;
-  roles: Array<string>;
+  roles: string;
   status: string;
 }

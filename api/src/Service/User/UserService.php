@@ -2,6 +2,7 @@
 
 namespace App\Service\User;
 
+use App\Entity\User\Permission;
 use App\Entity\User\User;
 use App\Exception\DbException;
 use App\Repository\User\UserRepository;
@@ -142,6 +143,21 @@ class UserService
             $user->setPasswordHash($this->passwordHashService->hashPassword($user, $data['password']));
         }
         $user->onPreUpdate();
+        $this->userRepository->save($user);
+        return $user;
+    }
+
+    /**
+     * Assign permission to user
+     *
+     * @param $id
+     * @param Permission $permission
+     * @return User
+     */
+    public function assignPermission($id, Permission $permission): User
+    {
+        $user = $this->userRepository->get($id);
+        $user->setPermission($permission)->onPreUpdate();
         $this->userRepository->save($user);
         return $user;
     }

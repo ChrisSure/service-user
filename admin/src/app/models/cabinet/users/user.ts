@@ -4,7 +4,7 @@ import { Permission } from './permission';
 export interface User {
   email: string;
   id?: number;
-  roles: Array<string>;
+  roles: string;
   social?: Array<Social>;
   permission?: Array<Permission>;
   status: string;

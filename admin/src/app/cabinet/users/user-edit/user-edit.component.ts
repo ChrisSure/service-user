@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../../../services/cabinet/users/user.servise';
-import { UserCreateDto } from '../../../models/cabinet/users/dtos/user-create-dto';
 import { roles } from '../../../models/cabinet/users/lists/roles-list';
 import { statuses } from '../../../models/common/status/lists/statuses-list';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
@@ -51,7 +50,8 @@ export class UserEditComponent implements OnInit {
   public onSubmit(): void {
     const user: UserEditDto = {
       email: this.editUserForm.value.email,
-      roles: (this.editUserForm.value.role === '0') ? this.roles[0].key : this.editUserForm.value.role,
+      roles: (this.editUserForm.value.role === '0') ? this.roles[0].key :
+        Array.isArray(this.editUserForm.value.role) ? this.editUserForm.value.role[0] : this.editUserForm.value.role,
       status: (this.editUserForm.value.status === '0') ? this.statuses[0].key : this.editUserForm.value.status
     };
     this.userService.editUser(this.id, user).subscribe((response) => {

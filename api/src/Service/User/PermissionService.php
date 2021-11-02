@@ -77,6 +77,19 @@ class PermissionService
     }
 
     /**
+     * Get single permission object
+     *
+     * @param int $id
+     * @return Permission
+     */
+    public function getPermissionObj(int $id): Permission
+    {
+        return $this->permissionRepository->get($id);
+    }
+
+
+
+    /**
      * Create permission
      *
      * @param array $data

@@ -69,6 +69,20 @@ class PermissionServiceTest extends Base
     /**
      * @test
      */
+    public function getPermissionObj()
+    {
+        $this->permissionRepositoryMock->shouldReceive('get')->andReturn($this->permissionMock);
+        $this->permissionMock->shouldReceive('getName')->andReturn($name = $this->arrayData['name']);
+        $permissionService = new PermissionService($this->permissionRepositoryMock, $this->serializeServiceMock);
+        $result = $permissionService->getPermissionObj(1);
+
+        $this->assertTrue(is_string($result->getName()));
+        $this->assertEquals($name, $result->getName());
+    }
+
+    /**
+     * @test
+     */
     public function createUser()
     {
         $this->permissionRepositoryMock->shouldReceive('findOneBy')->andReturn(null);

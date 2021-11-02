@@ -3,6 +3,7 @@
 namespace App\Controller\User;
 
 use App\Exception\DbException;
+use App\Service\User\PermissionService;
 use App\Service\User\UserService;
 use App\Validation\User\CreateUserValidation;
 use App\Validation\User\UpdateUserValidation;
@@ -30,12 +31,18 @@ class UserController extends AbstractController
     private $userService;
 
     /**
+     * @var PermissionService
+     */
+    private $permissionService;
+
+    /**
      * UserController constructor.
      * @param UserService $userService
      */
-    public function __construct(UserService $userService)
+    public function __construct(UserService $userService, PermissionService $permissionService)
     {
         $this->userService = $userService;
+        $this->permissionService = $permissionService;
     }
 
     /**
@@ -173,6 +180,25 @@ class UserController extends AbstractController
             return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
         } catch(\InvalidArgumentException $e) {
             return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+    /**
+     * @Route("/{id}/assign-permission/{permissionId}",  methods={"GET"})
+     * Assign permission to user
+     *
+     * @param $id
+     * @param $permissionId
+     * @return JsonResponse
+     */
+    public function assignPermission($id, $permissionId): JsonResponse
+    {
+        try {
+            $permission = $this->permissionService->getPermissionObj($permissionId);
+            $this->userService->assignPermission($id, $permission);
+            return new JsonResponse(['message' => "Permission was assigned successfull"], Response::HTTP_OK);
+        } catch(NotFoundHttpException $e) {
+            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
         }
     }
 
