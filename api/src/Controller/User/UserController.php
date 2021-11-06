@@ -203,6 +203,25 @@ class UserController extends AbstractController
     }
 
     /**
+     * @Route("/{id}/remove-permission/{permissionId}",  methods={"GET"})
+     * Remove permission to user
+     *
+     * @param $id
+     * @param $permissionId
+     * @return JsonResponse
+     */
+    public function removePermission($id, $permissionId): JsonResponse
+    {
+        try {
+            $permission = $this->permissionService->getPermissionObj($permissionId);
+            $this->userService->removePermission($id, $permission);
+            return new JsonResponse(['message' => "Permission was removed successfull"], Response::HTTP_OK);
+        } catch(NotFoundHttpException $e) {
+            return new JsonResponse(["error" => $e->getMessage()], Response::HTTP_NOT_FOUND);
+        }
+    }
+
+    /**
      * @Route("/{id}/activate",  methods={"GET"})
      * Activate user
      *

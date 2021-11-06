@@ -143,6 +143,12 @@ class User implements UserInterface
         return $this;
     }
 
+    public function removePermission(Permission $permission): self
+    {
+        $this->permission->removeElement($permission);
+        return $this;
+    }
+
     public function getEmail(): ?string
     {
         return $this->email;

@@ -187,6 +187,30 @@ class UserServiceTest extends Base
     /**
      * @test
      */
+    public function removePermission()
+    {
+        $permissionMock = Mockery::mock(Permission::class);
+        $this->userRepositoryMock->shouldReceive('get')->andReturn($this->userMock);
+        $this->userMock->shouldReceive('removePermission')->andReturn($this->userMock);
+        $this->userMock->shouldReceive('getPermission')->andReturn(new ArrayCollection([$permissionMock]));
+        $this->userMock->shouldReceive('onPreUpdate')->andReturn($this->userMock);
+        $this->userRepositoryMock->shouldReceive('save')->andReturn(null);
+
+        $userService = new UserService($this->userRepositoryMock, $this->serializeServiceMock, $this->passwordServiceMock);
+        $result = $userService->removePermission($this->faker->randomDigit, $permissionMock);
+
+        $typeObject = false;
+        if ($result instanceof User) {
+            $typeObject = true;
+        }
+
+        $this->assertTrue($typeObject);
+        $this->assertEquals($permissionMock, $result->getPermission()[0]);
+    }
+
+    /**
+     * @test
+     */
     public function deleteUser()
     {
         $this->userRepositoryMock->shouldReceive('get')->andReturn($this->userMock);

@@ -163,6 +163,21 @@ class UserService
     }
 
     /**
+     * Remove permission to user
+     *
+     * @param $id
+     * @param Permission $permission
+     * @return User
+     */
+    public function removePermission($id, Permission $permission): User
+    {
+        $user = $this->userRepository->get($id);
+        $user->removePermission($permission)->onPreUpdate();
+        $this->userRepository->save($user);
+        return $user;
+    }
+
+    /**
      * Delete user
      *
      * @param $id
