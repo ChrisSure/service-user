@@ -6,7 +6,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^1.10",
-        "firebase/php-jwt": "^5.2",
+        "firebase/php-jwt": "^6.0",
         "nelmio/api-doc-bundle": "^4.3",
         "nelmio/cors-bundle": "^2.0",
         "sensio/framework-extra-bundle": "^6.1",
